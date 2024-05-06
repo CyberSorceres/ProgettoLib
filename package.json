@@ -1,0 +1,23 @@
+{
+  "name": "progettolib",
+  "version": "1.0.0",
+  "description": "Libreria del progetto",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CyberSorceres/ProgettoLib.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CyberSorceres/ProgettoLib/issues"
+  },
+  "homepage": "https://github.com/CyberSorceres/ProgettoLib#readme",
+  "devDependencies": {
+    
+    "vitest": "^1.6.0"
+  }
+}
