@@ -22,7 +22,5 @@ jobs:
         run: npm ci
       - name: Build 
         run: npm run build
-      - name: Upload to github pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist 
+      - name: Run tsc
+        run: npx tsc
