@@ -1,26 +1,45 @@
 import { EpicStory } from "./EpicStory";
 import { API_interface } from "./API_interface";
-import { API } from "./API";
-
+import { MockAPI } from "./MockAPI";
+// Define the ProjectData interface
+export interface ProjectData {
+    id: string;
+    name: string;
+    isValidated: boolean;
+    epicStories: string[]; // Array of EpicStory IDs
+  }
+  
 export class Progetto{
     private _id: string;
     private _name: string;
     private _isValidated: boolean;
-    private epicStories: EpicStory[];
+    private epicStories: EpicStory[] = [];
 
-    constructor(id: string, myAPI: API_interface){
+    constructor(id: string){
         this._id = id;
+    }
 
-        myAPI.getProgetto(this.id).then((responseData) => {
-            this._name = responseData.property1;
-            this._isValidated = responseData.property2;
+    public async fetchData(myAPI: API_interface){
+        try {
+            const projectData = await myAPI.getProgetto(this.id);
 
-            responseData.property3.forEach((epicStoryId: string) => {
-                this.epicStories.push(new EpicStory(epicStoryId));
-            });
-        }).catch((error) => {
-            console.error('Error loading data:', error);
-        });
+            if (projectData) {
+              this._name = projectData.name;
+              this._isValidated = projectData.isValidated;
+              for (const epicStoryId of projectData.epicStories) {
+                let epic = new EpicStory(epicStoryId);
+                epic.fetchData(myAPI);
+                this.epicStories.push(epic);
+
+                }
+            } else {
+              // Handle case where project data is not found
+              console.error(`Project with ID ${this.id} not found`);
+            }
+          } catch (error) {
+            // Handle error from API call
+            console.error(`Error fetching project data for ID ${this.id}:`, error);
+          }
     }
 
     public get id(): string{
