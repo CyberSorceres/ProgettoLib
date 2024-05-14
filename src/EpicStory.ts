@@ -4,6 +4,8 @@ export class EpicStory{
 
     constructor(id: string) {
         this._id = id;
+
+        //call to getEpicStory(id).......
     }
 
     public get id():string {

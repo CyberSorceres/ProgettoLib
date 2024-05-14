@@ -5,6 +5,8 @@ export class UserStory{
 
     constructor (id: string){
         this._id = id; 
+
+        //call to getEpicStory (api)
     }
 
     public get id(): string{

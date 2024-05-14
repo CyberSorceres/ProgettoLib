@@ -3,8 +3,9 @@ import { API } from "./API";
 export class MockAPI implements API{
     //code
 
-    /*getProgetto(){
-        retun ...; //ritorna sempre lo stesso progetto di default
+    public getProgetto(id: string): Promise<any>{
+        //costruisco il json per un progetto
+        //return ; //ritorna il json
     }
     */
 }
