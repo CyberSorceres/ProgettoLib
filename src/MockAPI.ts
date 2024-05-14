@@ -33,7 +33,12 @@ export class MockAPI implements API_interface{
           return Promise.resolve(null);
         }
       }
+
+      //TODO getUserStory
 }
+
+
+//TODO move to new file
 
 const mockProjects: ProjectData[] = [
     {
@@ -64,3 +69,5 @@ const mockProjects: ProjectData[] = [
         descrizione: "Epic Story 3"
       }
   ];
+
+  //TODO mockUserStories

@@ -4,6 +4,8 @@ enum State {
     DONE
 }
 
+//TODO UserData
+
 export class UserStory{
     
     private _id : string; 
@@ -14,10 +16,10 @@ export class UserStory{
 
     constructor (id: string){
         this._id = id; 
-
-        //call to getEpicStory (api)
     }
 
+    //TODO fetchData(myAPI....)
+    
     public get id(): string{
         return this._id;
     }
