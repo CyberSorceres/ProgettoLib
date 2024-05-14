@@ -1,27 +1,33 @@
-import { describe, test, expect } from 'vitest';
-import { UserStory } from '../../src/UserStory'; 
+import { describe, it, expect, beforeEach } from 'vitest';
+import { UserStory, State } from '../../src/UserStory';
 
 describe('UserStory', () => {
-    test('should create an instance with the provided id', () => {
-        const userStory = new UserStory('123');
-        expect(userStory.id).toBe('123');
+    let userStory: UserStory;
+    
+    beforeEach(() => {
+        userStory = new UserStory('1');
     });
 
-    test('should set and get the tag', () => {
-        const userStory = new UserStory('123');
+    it('should initialize with given id', () => {
+        expect(userStory.id).toBe('1');
+    });
+
+    it('should get and set tag', () => {
         userStory.tag = 'feature';
         expect(userStory.tag).toBe('feature');
     });
 
-    test('should set and get the description', () => {
-        const userStory = new UserStory('123');
-        userStory.description = 'This is a user story description';
-        expect(userStory.description).toBe('This is a user story description');
+    it('should get and set description', () => {
+        userStory.description = 'This is a user story';
+        expect(userStory.description).toBe('This is a user story');
     });
 
-    test('should return undefined for tag and description if not set', () => {
-        const userStory = new UserStory('123');
-        expect(userStory.tag).toBeUndefined();
-        expect(userStory.description).toBeUndefined();
+    it('should get state', () => {
+        expect(userStory.state).toBe(undefined); 
     });
+
+    it('should get verified', () => {
+        expect(userStory.verified).toBe(undefined); 
+    });
+
 });
