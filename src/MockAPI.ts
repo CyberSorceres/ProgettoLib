@@ -1,6 +1,7 @@
 import { API_interface } from "./API_interface";
 import { EpicData, EpicStory } from "./EpicStory";
 import { ProjectData } from "./Progetto";
+import { UserData, UserStory} from "./UserStory"
 
 export class MockAPI implements API_interface{
 
@@ -33,8 +34,19 @@ export class MockAPI implements API_interface{
           return Promise.resolve(null);
         }
       }
-
-      //TODO getUserStory
+      getUserStory(myId: string): Promise<UserData | null> {
+        console.log('mockAPi get userstory');
+        const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
+        
+        if (mockUser) {
+          return Promise.resolve({
+            id: mockUser.id,
+            descrizione: mockUser.descrizione
+          }) as Promise<UserData | null>
+        } else {
+          return Promise.resolve(null);
+        }
+      }
 }
 
 
@@ -70,4 +82,17 @@ const mockProjects: ProjectData[] = [
       }
   ];
 
-  //TODO mockUserStories
+  const mockUserStories: UserData[] = [
+    {
+      id: "1",
+      descrizione: "User Story 1"
+    },
+    {
+      id: "2",
+      descrizione: "User Story 2"
+    },
+    {
+        id: "3",
+        descrizione: "User Story 3"
+      }
+  ];

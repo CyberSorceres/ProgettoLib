@@ -1,10 +1,15 @@
+import { API_interface } from "./API_interface";
+
 enum State {
     TO_DO,
     IN_PROGRESS,
     DONE
 }
 
-//TODO UserData
+export interface UserData {
+    id: string;
+    descrizione: string;
+  }
 
 export class UserStory{
     
@@ -18,7 +23,21 @@ export class UserStory{
         this._id = id; 
     }
 
-    //TODO fetchData(myAPI....)
+    public async fetchData(myAPI: API_interface) {
+        try {
+            const UserData = await myAPI.getUserStory(this.id);
+
+            if (UserData) {
+              this.description = UserData.descrizione;
+            } else {
+              // Handle case where project data is not found
+              console.error(`User story with ID ${this.id} not found`);
+            }
+          } catch (error) {
+            // Handle error from API call
+            console.error(`Error fetching user story data for ID ${this.id}:`, error);
+          }
+    }
     
     public get id(): string{
         return this._id;
