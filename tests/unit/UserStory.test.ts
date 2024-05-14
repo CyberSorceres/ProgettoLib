@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { UserStory, State } from '../../src/UserStory';
+import { UserStory } from '../../src/UserStory';
 
 describe('UserStory', () => {
     let userStory: UserStory;

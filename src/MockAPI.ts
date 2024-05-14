@@ -6,9 +6,10 @@ export class MockAPI implements API{
         const progetto = {
         id: id,
         nome: `Progetto ${id}`,
-        validato: Math.random() > 0.5 // Simula una validazione casuale tra true 1 e false 0
+        validato: true,
         };
         
         return Promise.resolve(progetto);
     }
 }
+
