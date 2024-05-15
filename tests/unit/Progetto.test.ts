@@ -7,11 +7,11 @@ describe('Progetto', () => {
     let progetto: Progetto;
 
     beforeEach(() => {
-        progetto = new Progetto('123');
+        progetto = new Progetto('1');
     });
 
     test('should initialize with given id', () => {
-        expect(progetto.id).toBe('123');
+        expect(progetto.id).toBe('1');
     });
 
     test('should initialize with undefined name', () => {
@@ -22,8 +22,7 @@ describe('Progetto', () => {
         expect(progetto.isValidated).toBeUndefined();
     });
 
-    test('should correctly construct a new project', async () => {
-        progetto = new Progetto('1');
+    test('should correctly fetch data for a new project', async () => {
         await progetto.fetchData(new MockAPI());
 
         expect(progetto.id).toBe('1');

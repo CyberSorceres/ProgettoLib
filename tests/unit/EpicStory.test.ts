@@ -1,5 +1,6 @@
 import { describe, test , expect, beforeEach } from 'vitest';
 import { EpicStory } from '../../src/EpicStory';
+import { MockAPI } from '../../src/MockAPI';
 
 describe('EpicStory', () => {
 
@@ -19,5 +20,13 @@ describe('EpicStory', () => {
         const descrizione = 'This is a new Epic Story';
         story.descrizione = descrizione;
         expect(story.descrizione).toBe(descrizione);
+    })
+
+    test('should correctly fetch fata for a new EpicStory', async () => {
+        let story = new EpicStory('1');
+        await story.fetchData(new MockAPI());
+
+        expect(story.id).toBe('1');
+        expect(story.descrizione).toBe("Epic Story 1");
     })
 });
