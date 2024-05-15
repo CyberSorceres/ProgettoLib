@@ -4,7 +4,8 @@
   "description": "Libreria del progetto",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
