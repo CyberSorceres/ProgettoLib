@@ -1,7 +1,9 @@
 import { API_interface } from "./API_interface";
 import { EpicData, EpicStory } from "./EpicStory";
+import { mockProjects, mockEpicStories, mockUserStories } from "./MockData";
 import { ProjectData } from "./Progetto";
 import { UserData, UserStory} from "./UserStory"
+
 
 export class MockAPI implements API_interface{
 
@@ -48,51 +50,3 @@ export class MockAPI implements API_interface{
         }
       }
 }
-
-
-//TODO move to new file
-
-const mockProjects: ProjectData[] = [
-    {
-      id: "1",
-      name: "Project A",
-      isValidated: true,
-      epicStories: ["1", "2", "3"] // Array of EpicStory IDs
-    },
-    {
-      id: "2",
-      name: "Project B",
-      isValidated: false,
-      epicStories: ["4", "5"] // Array of EpicStory IDs
-    }
-  ];
-
-  const mockEpicStories: EpicData[] = [
-    {
-      id: "1",
-      descrizione: "Epic Story 1"
-    },
-    {
-      id: "2",
-      descrizione: "Epic Story 2"
-    },
-    {
-        id: "3",
-        descrizione: "Epic Story 3"
-      }
-  ];
-
-  const mockUserStories: UserData[] = [
-    {
-      id: "1",
-      descrizione: "User Story 1"
-    },
-    {
-      id: "2",
-      descrizione: "User Story 2"
-    },
-    {
-        id: "3",
-        descrizione: "User Story 3"
-      }
-  ];
