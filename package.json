@@ -1,10 +1,11 @@
 {
   "name": "progettolib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Libreria del progetto",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
