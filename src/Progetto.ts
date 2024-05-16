@@ -34,11 +34,11 @@ export class Progetto{
 				}
 			} else {
 				// Handle case where project data is not found
-				console.error(`Project with ID ${this.id} not found`);
+				throw new Error(`Project with ID ${this.id} not found`);
 			}
 		} catch (error) {
 			// Handle error from API call
-			console.error(`Error fetching project data for ID ${this.id}:`, error);
+			throw new Error(`Error fetching project data for ID ${this.id}:`, error);
 		}
 	}
 	
@@ -56,6 +56,9 @@ export class Progetto{
 	
 	public get epicStories(): EpicStory[]{
 		return this._epicStories;
+	}	
+
+	public getEpicStoryById(id: string): EpicStory | undefined {
+        return this.epicStories.find(epicStory => epicStory.id === id);
 	}
-	
 }

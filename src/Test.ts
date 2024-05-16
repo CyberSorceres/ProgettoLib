@@ -15,4 +15,21 @@ export class Test{
 
         return new Response(null);//todo
     }
+
+    public getUScode(): string {
+        return this.UScode;
+    }
+
+    public setUScode(code: string): void {
+        this.UScode = code;
+    }
+
+    public getTestCode(): string {
+        return this.testCode;
+    }
+
+    public setTestCode(code: string): void {
+        this.testCode = code;
+    }
+
 }

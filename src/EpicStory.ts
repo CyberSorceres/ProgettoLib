@@ -32,11 +32,11 @@ export class EpicStory{
 					}
 			} else {
 				// Handle case where project data is not found
-				console.error(`Epic Story with ID ${this.id} not found`);
+				throw new Error(`Epic Story with ID ${this.id} not found`);
 			}
 		} catch (error) {
 			// Handle error from API call
-			console.error(`Error fetching epic story data for ID ${this.id}:`, error);
+			throw new Error(`Error fetching epic story data for ID ${this.id}:`, error);
 		}
 	}
 	public get id():string {
@@ -49,5 +49,13 @@ export class EpicStory{
 	
 	public set descrizione(descrizione: string) {
 		this._descrizione = descrizione;
+	}
+
+	public getUserStories(): UserStory[] {
+        return this.userStories;
+    }
+
+    public getUserStoryById(id: string): UserStory | undefined {
+        return this.userStories.find(userStory => userStory.id === id);
 	}
 }
