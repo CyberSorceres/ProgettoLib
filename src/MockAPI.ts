@@ -29,7 +29,8 @@ export class MockAPI implements API_interface{
         if (mockEpic) {
           return Promise.resolve({
             id: mockEpic.id,
-            descrizione: mockEpic.descrizione
+            descrizione: mockEpic.descrizione,
+            userStories: mockEpic.userStories
           }) as Promise<EpicData | null>
         } else {
           return Promise.resolve(null);
