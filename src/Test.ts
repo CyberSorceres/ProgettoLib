@@ -1,8 +1,18 @@
+import { API_interface } from "./API_interface";
+
 export class Test{
-    private VScode : string;
+    private UScode : string;
     private testCode: string;
+    
+    constructor(code: string) {
+        this.UScode = code;
+    }
+    
+    public generateUnitTest(api: API_interface): Response{
+        const prompt = 'promt_text';
+        
+        api.promptToAI(prompt);
 
-    public generateUnitTest(){}
+        return new Response(null);//todo
+    }
 }
-
-

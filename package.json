@@ -1,6 +1,6 @@
 {
   "name": "progettolib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Libreria del progetto",
   "main": "index.js",
   "scripts": {

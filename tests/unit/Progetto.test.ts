@@ -1,6 +1,8 @@
 import { describe, expect, beforeEach, test} from 'vitest';
 import { Progetto } from '../../src/Progetto';
 import { MockAPI } from '../../src/MockAPI';
+import { mockEpicStories } from '../../src/MockData';
+import { EpicStory } from '../../src/EpicStory';
 
 
 describe('Progetto', () => {

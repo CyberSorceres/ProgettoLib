@@ -24,7 +24,6 @@ export class MockAPI implements API_interface{
       }
 
       getEpicStory(myId: string): Promise<EpicData | null> {
-        console.log('mockAPi get epicstory');
         const mockEpic: EpicData | undefined = mockEpicStories.find(epic => epic.id === myId);
         
         if (mockEpic) {
@@ -37,16 +36,22 @@ export class MockAPI implements API_interface{
         }
       }
       getUserStory(myId: string): Promise<UserData | null> {
-        console.log('mockAPi get userstory');
         const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
         
         if (mockUser) {
           return Promise.resolve({
             id: mockUser.id,
-            descrizione: mockUser.descrizione
+            tag: mockUser.tag,
+            description: mockUser.description,
+            state: mockUser.state,
+            verified: mockUser.verified
           }) as Promise<UserData | null>
         } else {
           return Promise.resolve(null);
         }
+      }
+
+      public promptToAI(prompt: string): Promise<string> {
+          return Promise.resolve(prompt);
       }
 }
