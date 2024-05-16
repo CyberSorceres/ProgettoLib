@@ -31,5 +31,4 @@ export class Test{
     public setTestCode(code: string): void {
         this.testCode = code;
     }
-
 }

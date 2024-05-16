@@ -58,4 +58,8 @@ export class EpicStory{
     public getUserStoryById(id: string): UserStory | undefined {
         return this.userStories.find(userStory => userStory.id === id);
 	}
+
+	public getUserStoryByTag(tag: string): UserStory | undefined {
+        return this.userStories.find(userStory => userStory.tag === tag);
+	}
 }
