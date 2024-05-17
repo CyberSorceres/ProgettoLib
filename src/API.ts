@@ -10,20 +10,21 @@ export class API implements API_interface {
             const jsonData = await response.json();
             return jsonData;
         } catch (error) {
-            throw new Error('Failed to fetch data from API');
+            throw new Error('Failed to fetch data from API'); //l'api getProgetti returns all the project in the database so in this function we need to call this api 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti' and return the progect that has the id we want.
         }
     }
 
     async getEpicStory(id: string): Promise<EpicData | null> {
-        const endpoint = 'https://d3ga6czusb.execute-api.eu-central-1.amazonaws.com/dev/getEpicStory'; //correggere url
+        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti'; 
         const response = await fetch(`${endpoint}?id=${id}`);
         const jsonData = await response.json() as EpicData;
         console.log(jsonData);
         return jsonData;
     }
+    //l'api getProgetti returns all the project in the database so in this function we need to call this api 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti' and return the progect that has the id we want. getuserstory e getepicstory
     
     async getUserStory(id: string): Promise<UserData | null> {
-        const endpoint = 'https://d3ga6czusb.execute-api.eu-central-1.amazonaws.com/dev/getUserStory'; //correggere url
+        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti'; 
         const response = await fetch(`${endpoint}?id=${id}`);
         const jsonData = await response.json() as UserData;
         console.log(jsonData);

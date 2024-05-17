@@ -26,7 +26,6 @@ describe('Progetto', () => {
 
     test('should correctly fetch data for a new project', async () => {
         await progetto.fetchData(new MockAPI());
-
         expect(progetto.id).toBe('1');
         expect(progetto.isValidated).toBe(true);
         expect(progetto.name).toBe('Project A');

@@ -1,6 +1,7 @@
 import { describe, test , expect, beforeEach } from 'vitest';
 import { EpicStory } from '../../src/EpicStory';
 import { MockAPI } from '../../src/MockAPI';
+import { mockEpicStories } from '../../src/MockData';
 
 describe('EpicStory', () => {
 
@@ -24,10 +25,11 @@ describe('EpicStory', () => {
         expect(story.descrizione).toBe(descrizione);
     })
 
-    test('should correctly fetch data for a new EpicStory', async () => {
+    test('should correctly fetch data for a new EpicStory', async () => {  
         await story.fetchData(new MockAPI());
         expect(story.id).toBe('1');
-        expect(story.descrizione).toBe("Epic Story 1");
+        expect(story.descrizione).toBe("Epic Story 1"); 
+        expect(story.userStories[0]).toBe(mockEpicStories[0]);
     })
 
     test('should return the correct UserStory by ID', async () => {
