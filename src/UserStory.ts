@@ -13,6 +13,7 @@ export interface UserData {
     description: string;
     state: State;
     verified: boolean;
+    test: Test;
 }
 
 export class UserStory{
@@ -24,8 +25,16 @@ export class UserStory{
     private _verified: boolean;
     private _test: Test;
     
-    constructor (id: string){
-        this._id = id; 
+    constructor(id: string, user?: UserData){
+        this._id = id;
+        if(user){
+            this._id = user.id;
+            this._tag = user.tag;
+            this._description = user.description;
+            this._state = user.state;
+            this._verified = user.verified;
+            this._test = user.test;
+        }
     }
     
     public async fetchData(myAPI: API_interface) {
