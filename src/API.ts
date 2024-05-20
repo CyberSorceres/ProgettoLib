@@ -53,6 +53,16 @@ export class API implements API_interface {
     }
 
     async promptToAI(prompt: string): Promise<string> {
-        return null;
+        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock';
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            body: JSON.stringify({ prompt }),
+        });   
+        const jsonData = await response.json();
+        return jsonData as string;
     }
 }
+
+
+
+

@@ -110,4 +110,17 @@ describe('API', () => {
             await expect(api.getUserStory('1')).rejects.toThrow('Failed to fetch data from API');
         });
     });
+    
+    describe('promptToApi', () => {
+        test('should return the response from the AI', async () => {
+            const mockResponse = 'Response from AI';
+            vi.spyOn(global, 'fetch').mockResolvedValue({
+                ok: true,
+                json: async () => mockResponse,
+            } as Response);
+
+            const response = await api.promptToAI('Prompt');
+            expect(response).toEqual('Response from AI');
+        });
+    });
 });
