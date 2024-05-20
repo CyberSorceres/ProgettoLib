@@ -1,10 +1,10 @@
 import { API_interface } from "./API_interface";
-import { UserStory } from "./UserStory";
+import { UserData, UserStory } from "./UserStory";
 
 export interface EpicData {
 	id: string;
 	descrizione: string;
-	userStories: string[];
+	userStories: UserData[];
 }
 
 export class EpicStory{
@@ -13,9 +13,16 @@ export class EpicStory{
 	private _userStories: UserStory[] = [];
 	
 	
-	constructor(id: string) {
+	constructor(id: string, epic?: EpicData) {
 		this._id = id;
 		
+		if(epic){
+			this._id = epic.id;
+			this._descrizione = epic.descrizione;
+			for(const user of epic.userStories){
+				this._userStories.push(new UserStory('0', user));
+			}
+		}
 	}
 	
 	public async fetchData(myAPI: API_interface) {
@@ -24,8 +31,8 @@ export class EpicStory{
 			
 			if (epicData) {
 				this._descrizione = epicData.descrizione;
-				for (const userStoryId of epicData.userStories) {
-					let user = new UserStory(userStoryId);
+				for (const userStory of epicData.userStories) {
+					let user = new UserStory(userStory.id);
 					user.fetchData(myAPI);
 					this._userStories.push(user);
 					}
