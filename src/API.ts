@@ -32,7 +32,7 @@ export class API implements API_interface {
             }
             return epicStory;
         } catch (error) {
-            throw new Error('Failed to fetch data from API');
+            throw new Error('Failed to fetch data from API: Epic story with that id not found');
         }
     }
 
@@ -48,7 +48,7 @@ export class API implements API_interface {
             }
             return userStory;
         } catch (error) {
-            throw new Error('Failed to fetch data from API');
+            throw new Error('Failed to fetch data from API: User story with that id not found');
         }
     }
 
