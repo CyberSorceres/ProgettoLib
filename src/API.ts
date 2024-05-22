@@ -62,8 +62,9 @@ export class API implements API_interface {
     }
 
     async bedrock(prompt: string): Promise<string> {
-        const endpoint = `https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock?inputText=${prompt}`;
+        const endpoint = `https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock?message=${prompt}`;
         const response = await this.authenticatedFetch(endpoint);
+        console.log(response);
         if(response.ok){
             return (await response.json() as any).response;
         }
@@ -89,7 +90,6 @@ export class API implements API_interface {
             const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
             if(response.ok){
                 this.token = (await response.json() as any).AuthenticationResult.AccessToken;
-                console.log(this.token);
                 return true;
             }
             else{

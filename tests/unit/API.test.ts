@@ -114,7 +114,7 @@ describe('API', () => {
         const password = 'password';
 
         test('bedrock', async () => {
-            await api.login(email,password);
+            expect(await api.login(email,password)).toBe(true);
             const prompt = 'hello';
             const response = await api.bedrock(prompt);
             console.log(response);
