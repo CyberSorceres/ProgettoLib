@@ -109,5 +109,15 @@ describe('API', () => {
 
             await expect(api.getUserStory('1')).rejects.toThrow('Failed to fetch data from API');
         });
+
+        const email = 'giulia@gmail.com';
+        const password = 'password';
+
+        test('bedrock', async () => {
+            await api.login(email,password);
+            const prompt = 'hello';
+            const response = await api.bedrock(prompt);
+            console.log(response);
+        });
     });
 });

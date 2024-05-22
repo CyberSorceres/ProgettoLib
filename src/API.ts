@@ -61,16 +61,35 @@ export class API implements API_interface {
         }
     }
 
-    async promptToAI(prompt: string): Promise<string> {
-        return null;
+    async bedrock(prompt: string): Promise<string> {
+        const endpoint = `https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock?inputText=${prompt}`;
+        const response = await this.authenticatedFetch(endpoint);
+        if(response.ok){
+            return (await response.json() as any).response;
+        }
+        else{
+            throw new Error('Failed to fetch data from API: AI could not generate a response');
+        }
     }
 
-    async login(email: string, password: string): Promise<boolean> {
+    /*async chatgpt(prompt: string): Promise<string> {
         const endpoint = '...';
+        const response = await this.authenticatedFetch(endpoint, {method:'get', body: JSON.stringify({prompt})});
+        if(response.ok){
+            return (await response.json() as any).response;
+        }
+        else{
+            throw new Error('Failed to fetch data from API: AI could not generate a response');
+        }
+    }*/
+
+    async login(email: string, password: string): Promise<boolean> {
+        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/login';
         try{
             const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
             if(response.ok){
                 this.token = (await response.json() as any).AuthenticationResult.AccessToken;
+                console.log(this.token);
                 return true;
             }
             else{
