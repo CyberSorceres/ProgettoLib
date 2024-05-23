@@ -1,8 +1,8 @@
 import { API_interface } from "./API_interface";
-import { EpicData, EpicStory } from "./EpicStory";
-import { mockProjects, mockEpicStories, mockUserStories } from "./MockData";
-import { Progetto, ProjectData } from "./Progetto";
-import { UserData, UserStory} from "./UserStory"
+import { EpicStory } from "./EpicStory";
+import { mockProjects, mockEpicStories, mockUserStories, ProjectData, EpicData, UserData } from "./MockData";
+import { Progetto} from "./Progetto";
+import { UserStory} from "./UserStory"
 
 
 export class MockAPI implements API_interface{
@@ -17,18 +17,18 @@ export class MockAPI implements API_interface{
 		// Simulate fetching project data from a mock data source
 		const mockProject: ProjectData | undefined = mockProjects.find(project => project.id === myId);
 		
-		return Promise.resolve(new Progetto('0', mockProject));
+		return Promise.resolve(new Progetto(mockProject));
 	}
 	
 	getEpicStory(myId: string): Promise<EpicStory | null> {
 		const mockEpic: EpicData | undefined = mockEpicStories.find(epic => epic.id === myId);
 		
-		return Promise.resolve(new EpicStory('0', mockEpic));
+		return Promise.resolve(new EpicStory(mockEpic));
 	}
 	getUserStory(myId: string): Promise<UserStory | null> {
 		const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
 		
-		return Promise.resolve(new UserStory('0', mockUser));
+		return Promise.resolve(new UserStory(mockUser));
 	}
 	
 	//ADD

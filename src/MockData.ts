@@ -1,6 +1,29 @@
-import { EpicData } from "./EpicStory";
-import { ProjectData } from "./Progetto";
-import { UserData, State } from "./UserStory"; 
+import { AI } from "./Progetto";
+import { Test } from "./Test";
+import { State } from "./UserStory"; 
+
+// Define the ProjectData interface
+export interface ProjectData {
+	id: string;
+	name: string;
+	isValidated: boolean;
+	epicStoriesIds: string[];
+  ai: AI;
+}
+export interface EpicData {
+	id: string;
+	descrizione: string;
+	userStoriesIds: string[];
+}
+
+export interface UserData {
+  id: string;
+  tag: string;
+  description: string;
+  state: State;
+  verified: boolean;
+  test: Test;
+}
 
 export const mockUserStories: UserData[] = [
   {
@@ -81,17 +104,17 @@ export const mockEpicStories: EpicData[] = [
   {
     id: "1",
     descrizione: "Epic Story 1",
-    userStories: [mockUserStories[0], mockUserStories[1], mockUserStories[2]]
+    userStoriesIds: ['1', '2', '3']
   },
   {
     id: "2",
     descrizione: "Epic Story 2",
-    userStories: [mockUserStories[3], mockUserStories[4], mockUserStories[5], mockUserStories[6]]
+    userStoriesIds: ['4', '5', '6', '7']
   },
   {
     id: "3",
     descrizione: "Epic Story 3",
-    userStories: [mockUserStories[7], mockUserStories[8]]
+    userStoriesIds: ['8', '9']
   }
 ];
 
@@ -100,12 +123,14 @@ export const mockProjects: ProjectData[] = [
     id: "1",
     name: "Project A",
     isValidated: true,
-    epicStories: [mockEpicStories[0]]
+    epicStoriesIds: ['1'],
+    ai: AI.Bedrock
   },
   {
     id: "2",
     name: "Project B",
     isValidated: false,
-    epicStories: [mockEpicStories[1], mockEpicStories[2]]
+    epicStoriesIds: ['2', '3'],
+    ai: AI.ChatGPT
   }
 ];

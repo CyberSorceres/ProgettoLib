@@ -1,45 +1,37 @@
-import { EpicData, EpicStory } from "./EpicStory";
 import { API_interface } from "./API_interface";
-import { MockAPI } from "./MockAPI";
-// Define the ProjectData interface
-export interface ProjectData {
-	id: string;
-	name: string;
-	isValidated: boolean;
-	epicStories: EpicData[]; // Array of EpicStory IDs
+import { ProjectData } from "./MockData";
+
+export enum AI {
+    ChatGPT,
+	Bedrock
 }
 
 export class Progetto{
 	private _id: string;
 	private _name: string;
 	private _isValidated: boolean;
-	private _epicStories: EpicStory[] = [];
+	private _epicStoriesIds: string[];
+	private _ai: AI;
 	
-	constructor(id: string, project?: ProjectData){
-		this._id = id;
-		if(project){
+	constructor(project?: ProjectData){
+		if(project){ //construct project from projectData
 			this._id = project.id;
 			this._name = project.name;
 			this._isValidated = project.isValidated;
-			for(const epic of project.epicStories){
-				this._epicStories.push(new EpicStory('0', epic));
-			}
+			this._epicStoriesIds = project.epicStoriesIds;
+			this._ai = project.ai;
 		}
 	}
 	
-	public async fetchData(myAPI: API_interface){
+	public async fetchData(myAPI: API_interface, projectId: string){ //given an API instance and a projectId, initialize all the fields
 		try {
-			const projectData = await myAPI.getProgetto(this.id);
+			const projectData = await myAPI.getProgetto(projectId);
 			
 			if (projectData) {
 				this._name = projectData.name;
 				this._isValidated = projectData.isValidated;
-				for (const epicStory of projectData.epicStories) {
-					let epic = new EpicStory(epicStory.id);
-					epic.fetchData(myAPI);
-					this._epicStories.push(epic);
+				this._epicStoriesIds = projectData.epicStoriesIds;
 					
-				}
 			} else {
 				// Handle case where project data is not found
 				throw new Error(`Project with ID ${this.id} not found`);
@@ -62,11 +54,11 @@ export class Progetto{
 		return this._isValidated;
 	}
 	
-	public get epicStories(): EpicStory[]{
-		return this._epicStories;
-	}	
+	public get epicStoriesIds(): string[]{
+		return this._epicStoriesIds;
+	}
 
-	public getEpicStoryById(id: string): EpicStory | undefined {
-        return this.epicStories.find(epicStory => epicStory.id === id);
+	public get ai(): AI{
+		return this._ai;
 	}
 }

@@ -1,7 +1,7 @@
 import { API_interface } from "./API_interface";
-import { EpicData, EpicStory } from "./EpicStory";
-import { Progetto, ProjectData } from "./Progetto";
-import { UserData, UserStory } from "./UserStory";
+import { EpicStory } from "./EpicStory";
+import { Progetto} from "./Progetto";
+import { UserStory } from "./UserStory";
 
 export class API implements API_interface {
     private token: string;
