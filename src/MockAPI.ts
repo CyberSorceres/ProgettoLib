@@ -14,48 +14,48 @@ export class MockAPI implements API_interface{
 	
 	//GET
     getProgettiOfUser(userId: string): Promise<Progetto[]>{
-		return undefined;
+		const progetti: Progetto[] = [new Progetto(mockProjects[0]), new Progetto(mockProjects[1])];
+		return Promise.resolve(progetti);
 	}
+
     getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
-		return undefined;
+		const userStories: UserStory[] = [new UserStory(mockUserStories[0]), new UserStory(mockUserStories[1])];
+		return Promise.resolve(userStories);
 	}
-	getProgetto(myId: string): Promise<Progetto | null> {
+
+	getProgetto(myId: string): Promise<Progetto> {
 		// Simulate fetching project data from a mock data source
 		const mockProject: ProjectData | undefined = mockProjects.find(project => project.id === myId);
 		
 		return Promise.resolve(new Progetto(mockProject));
 	}
 	
-	getEpicStory(myId: string): Promise<EpicStory | null> {
+	getEpicStory(myId: string): Promise<EpicStory> {
 		const mockEpic: EpicData | undefined = mockEpicStories.find(epic => epic.id === myId);
 		
 		return Promise.resolve(new EpicStory(mockEpic));
 	}
-	getUserStory(myId: string): Promise<UserStory | null> {
+	getUserStory(myId: string): Promise<UserStory> {
 		const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
 		
 		return Promise.resolve(new UserStory(mockUser));
 	}
 	
 	//ADD
-	addProject(progetto: Progetto): Promise<Boolean | null>{
-		return null;
-		//TODO
+	addProject(progetto: Progetto): Promise<Boolean>{
+		return Promise.resolve(true);
 	}
-	addEpicStory(epic: EpicStory, projectId: string): Promise<string | null>{ //returns the id generated in the DB
-		return null;
-		//TODO
+	addEpicStory(epic: EpicStory, projectId: string): Promise<string>{ //returns the id generated in the DB
+		return Promise.resolve('1');
 	}
-	addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean | null>{
-		return null;
-		//TODO
+	addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean>{
+		return Promise.resolve(true);
 	}
 	
 	//UPDATE
-	//updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean | null>
-	splitUserStory(userStrory: UserStory): Promise<Boolean | null>{
-		return null;
-		//TODO
+	//updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
+	splitUserStory(userStrory: UserStory): Promise<Boolean>{
+		return Promise.resolve(true);
 	}
 	
 	//AI
@@ -63,9 +63,8 @@ export class MockAPI implements API_interface{
 		return Promise.resolve(prompt);
 	}
 	//chatgpt(prompt: string): Promise<string>;
-	sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean | null>{
-		return null;
-		//TODO
+	sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>{
+		return Promise.resolve(true);
 	}
 
 	
