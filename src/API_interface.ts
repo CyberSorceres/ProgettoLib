@@ -7,12 +7,12 @@ export interface API_interface {
     login(email: string, password: string): Promise<boolean>;
 
     //GET
-    getProgettiOfUser(userId: string): Promise<Progetto[]>;
+    getProgettiOfUser(): Promise<Progetto[]>;
     getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>;
 
     getProgetto(projectId: string): Promise<Progetto>;
-    getEpicStory(epicId: string): Promise<EpicStory>;    
-    getUserStory(userStoryId: string): Promise<UserStory>;
+    getEpicStory(epicId: string, projectId: string): Promise<EpicStory>;    
+    getUserStory(userStoryId: string,  projectId: string): Promise<UserStory>;
     
     //ADD
     addProject(progetto: Progetto): Promise<Boolean>;
