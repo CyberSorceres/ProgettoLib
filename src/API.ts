@@ -5,10 +5,11 @@ import { UserStory } from "./UserStory";
 
 export class API implements API_interface {
     private token: string;
+    private static baseUrl: string = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev';
     
 //LOGIN
     async login(email: string, password: string): Promise<boolean> {
-        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/login';
+        const endpoint = `${API.baseUrl}/login`;
         try{
             const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
             if(response.ok){
@@ -25,17 +26,32 @@ export class API implements API_interface {
     
     
 //GET
-    getProgettiOfUser(userId: string): Promise<Progetto[]>{
-        return undefined; //TODO implement
+    async getProgettiOfUser(): Promise<Progetto[]>{
+        const endpoint = `${API.baseUrl}/getProgetti`;
+        try{
+            const response = await this.authenticatedFetch(endpoint);
+            if(response.ok){
+                let progetti: Progetto[] = [];
+                for(const prog of await response.json()){
+                    progetti.push(new Progetto(prog.id, prog.name, prog.validated, prog.epicStories, prog.ai));
+                }
+                return progetti;
+            }
+            else{
+                return undefined;
+            }
+        } catch(error){
+            throw new Error(`Failed to fetch data from API: ${error.message}`);
+        }
     }
 
     getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
         return undefined; //TODO implement
     }
 
-    async getProgetto(id: string): Promise<Progetto> {
+    async getProgetto(id: string): Promise<Progetto> {//FIXME
         try {
-            const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti';
+            const endpoint = `${API.baseUrl}/getProgetto?${id}`;
             const response = await this.authenticatedFetch(endpoint, );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,22 +60,16 @@ export class API implements API_interface {
             const progetto = jsonData.find((progetto: any) => progetto.id === id);
             if (!progetto) {
                 throw new Error(`Project with id ${id} not found`);
-            }/*
-            const pro: ProjectData = {
-                id: progetto.id,
-                name: progetto.name,
-                isValidated: progetto.isValidated,
-                epicStories: 
-            }*/
+            }
             return progetto;
         } catch (error) {
             throw new Error(`Failed to fetch data from API: ${error.message}`);
         }
     }
     
-    async getEpicStory(id: string): Promise<EpicStory> {
+    async getEpicStory(epicId: string, projectId: string): Promise<EpicStory> {
         try {
-            const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getEpicStories';
+            const endpoint = `${API.baseUrl}/getProgetto?projectId=${projectId}?epicStoryId=${epicId}`;
             const response = await this.authenticatedFetch(endpoint);
             const jsonData: EpicStory[] = await response.json() as EpicStory[];
             const epicStory = jsonData.find((epic: EpicStory) => epic.id === id);
