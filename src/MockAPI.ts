@@ -13,7 +13,7 @@ export class MockAPI implements API_interface{
 	}
 	
 	//GET
-    getProgettiOfUser(userId: string): Promise<Progetto[]>{
+    getProgettiOfUser(): Promise<Progetto[]>{
 		const progetti: Progetto[] = [new Progetto(mockProjects[0]), new Progetto(mockProjects[1])];
 		return Promise.resolve(progetti);
 	}
@@ -23,22 +23,18 @@ export class MockAPI implements API_interface{
 		return Promise.resolve(userStories);
 	}
 
-	getProgetto(myId: string): Promise<Progetto> {
-		// Simulate fetching project data from a mock data source
-		const mockProject: ProjectData | undefined = mockProjects.find(project => project.id === myId);
-		
-		return Promise.resolve(new Progetto(mockProject));
+	getProgetto(projectId: string): Promise<Progetto> {
+		const progetto = new Progetto(mockProjects[projectId])
+		return Promise.resolve(progetto);
 	}
 	
-	getEpicStory(myId: string): Promise<EpicStory> {
-		const mockEpic: EpicData | undefined = mockEpicStories.find(epic => epic.id === myId);
-		
-		return Promise.resolve(new EpicStory(mockEpic));
+	getEpicStory(epicId: string, projectId: string): Promise<EpicStory> {
+		const epic = new EpicStory(mockEpicStories[epicId]);
+		return Promise.resolve(epic);
 	}
-	getUserStory(myId: string): Promise<UserStory> {
-		const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
-		
-		return Promise.resolve(new UserStory(mockUser));
+	getUserStory(userId: string, projectId: string): Promise<UserStory> {
+		const userStory = new UserStory(mockUserStories[userId])
+		return Promise.resolve(userStory);
 	}
 	
 	//ADD
