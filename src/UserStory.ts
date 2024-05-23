@@ -1,19 +1,10 @@
-import { API_interface } from "./API_interface";
+import { UserData } from "./MockData";
 import { Test } from "./Test";
 
 export enum State {
     TO_DO,
     IN_PROGRESS,
     DONE
-}
-
-export interface UserData {
-    id: string;
-    tag: string;
-    description: string;
-    state: State;
-    verified: boolean;
-    test: Test;
 }
 
 export class UserStory{
@@ -25,8 +16,7 @@ export class UserStory{
     private _verified: boolean;
     private _test: Test;
     
-    constructor(id: string, user?: UserData){
-        this._id = id;
+    constructor(user?: UserData){
         if(user){
             this._id = user.id;
             this._tag = user.tag;
@@ -34,26 +24,6 @@ export class UserStory{
             this._state = user.state;
             this._verified = user.verified;
             this._test = user.test;
-        }
-    }
-    
-    public async fetchData(myAPI: API_interface) {
-        try {
-            const UserData = await myAPI.getUserStory(this.id);
-            
-            if (UserData) {
-                this.tag = UserData.tag;
-                this.description = UserData.description;
-                this.state = UserData.state;
-                this.verified = UserData.verified;
-                
-            } else {
-                // Handle case where project data is not found
-                console.error(`User story with ID ${this.id} not found`);
-            }
-        } catch (error) {
-            // Handle error from API call
-            console.error(`Error fetching user story data for ID ${this.id}:`, error);
         }
     }
 

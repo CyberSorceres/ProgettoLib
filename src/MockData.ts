@@ -1,4 +1,5 @@
-import { UserData, State } from "./UserStory"; 
+import { Test } from "./Test";
+import { State } from "./UserStory"; 
 
 // Define the ProjectData interface
 export interface ProjectData {
@@ -11,6 +12,15 @@ export interface EpicData {
 	id: string;
 	descrizione: string;
 	userStoriesIds: string[];
+}
+
+export interface UserData {
+  id: string;
+  tag: string;
+  description: string;
+  state: State;
+  verified: boolean;
+  test: Test;
 }
 
 export const mockUserStories: UserData[] = [

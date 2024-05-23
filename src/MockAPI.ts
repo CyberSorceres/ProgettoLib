@@ -1,8 +1,8 @@
 import { API_interface } from "./API_interface";
 import { EpicStory } from "./EpicStory";
-import { mockProjects, mockEpicStories, mockUserStories, ProjectData, EpicData } from "./MockData";
+import { mockProjects, mockEpicStories, mockUserStories, ProjectData, EpicData, UserData } from "./MockData";
 import { Progetto} from "./Progetto";
-import { UserData, UserStory} from "./UserStory"
+import { UserStory} from "./UserStory"
 
 
 export class MockAPI implements API_interface{
@@ -28,7 +28,7 @@ export class MockAPI implements API_interface{
 	getUserStory(myId: string): Promise<UserStory | null> {
 		const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
 		
-		return Promise.resolve(new UserStory('0', mockUser));
+		return Promise.resolve(new UserStory(mockUser));
 	}
 	
 	//ADD
