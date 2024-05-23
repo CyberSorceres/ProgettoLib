@@ -120,6 +120,19 @@ describe('API', () => {
             console.log(response);
         });
     });
+    
+    describe('promptToApi', () => {
+        test('should return the response from the AI', async () => {
+            const mockResponse = 'Response from AI';
+            vi.spyOn(global, 'fetch').mockResolvedValue({
+                ok: true,
+                json: async () => mockResponse,
+            } as Response);
+
+            const response = await api.promptToAI('Prompt');
+            expect(response).toEqual('Response from AI');
+        });
+    });
 });
 
 /*import { beforeAll } from 'vitest';
