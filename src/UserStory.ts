@@ -1,4 +1,3 @@
-import { UserData } from "./MockData";
 import { Test } from "./Test";
 
 export enum State {
@@ -16,21 +15,13 @@ export class UserStory{
     private _verified: boolean;
     private _test: Test;
     
-    constructor(id: string, tag: string, description: string, state: State, verified: boolean, test: Test, user?: UserData){
+    constructor(id: string, tag: string, description: string, state: State, verified: boolean, test: Test){
         this._id = id;
         this._tag = tag;
         this._description = description;
         this._state = state;
         this._verified = verified;
         this._test = test;
-        if(user){
-            this._id = user.id;
-            this._tag = user.tag;
-            this._description = user.description;
-            this._state = user.state;
-            this._verified = user.verified;
-            this._test = user.test;
-        }
     }
 
     //getters
