@@ -25,6 +25,14 @@ export class API implements API_interface {
     
     
 //GET
+    getProgettiOfUser(userId: string): Promise<Progetto[]>{
+        return undefined; //TODO implement
+    }
+
+    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
+        return undefined; //TODO implement
+    }
+
     async getProgetto(id: string): Promise<Progetto> {
         try {
             const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti';
@@ -49,7 +57,7 @@ export class API implements API_interface {
         }
     }
     
-    async getEpicStory(id: string): Promise<EpicStory | null> {
+    async getEpicStory(id: string): Promise<EpicStory> {
         try {
             const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getEpicStories';
             const response = await this.authenticatedFetch(endpoint);
@@ -65,7 +73,7 @@ export class API implements API_interface {
     }
     
     
-    async getUserStory(id: string): Promise<UserStory | null> {
+    async getUserStory(id: string): Promise<UserStory> {
         try {
             const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getUserStories';
             const response = await this.authenticatedFetch(endpoint);
@@ -81,22 +89,22 @@ export class API implements API_interface {
     }
     
 //ADD
-    async addProject(progetto: Progetto): Promise<Boolean | null>{
+    async addProject(progetto: Progetto): Promise<Boolean>{
         return null;
         //TODO
     }
-    async addEpicStory(epic: EpicStory, projectId: string): Promise<string | null>{
+    async addEpicStory(epic: EpicStory, projectId: string): Promise<string>{
         return null;
         //TODO
     }
-    async addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean | null>{
+    async addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean>{
         return null;
         //TODO
     }
     
 //UPDATE
-    //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean | null>
-    splitUserStory(userStrory: UserStory): Promise<Boolean | null>{
+    //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
+    splitUserStory(userStrory: UserStory): Promise<Boolean>{
         return null;
         //TODO
     }
@@ -117,7 +125,7 @@ export class API implements API_interface {
 
 
     //chatgpt(prompt: string): Promise<string>;
-    sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean | null>{
+    sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>{
          return null;
          //TODO
     }

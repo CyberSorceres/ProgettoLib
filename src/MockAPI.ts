@@ -13,6 +13,12 @@ export class MockAPI implements API_interface{
 	}
 	
 	//GET
+    getProgettiOfUser(userId: string): Promise<Progetto[]>{
+		return undefined;
+	}
+    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
+		return undefined;
+	}
 	getProgetto(myId: string): Promise<Progetto | null> {
 		// Simulate fetching project data from a mock data source
 		const mockProject: ProjectData | undefined = mockProjects.find(project => project.id === myId);

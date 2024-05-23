@@ -7,21 +7,24 @@ export interface API_interface {
     login(email: string, password: string): Promise<boolean>;
 
     //GET
-    getProgetto(projectId: string): Promise<Progetto | null>;
-    getEpicStory(epicId: string): Promise<EpicStory | null>;    
-    getUserStory(userStoryId: string): Promise<UserStory | null>;
+    getProgettiOfUser(userId: string): Promise<Progetto[]>;
+    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>;
+
+    getProgetto(projectId: string): Promise<Progetto>;
+    getEpicStory(epicId: string): Promise<EpicStory>;    
+    getUserStory(userStoryId: string): Promise<UserStory>;
     
     //ADD
-    addProject(progetto: Progetto): Promise<Boolean | null>;
-    addEpicStory(epic: EpicStory, projectId: string): Promise<string | null>; //returns the id generated in the DB
-    addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean | null>;
+    addProject(progetto: Progetto): Promise<Boolean>;
+    addEpicStory(epic: EpicStory, projectId: string): Promise<string>; //returns the id generated in the DB
+    addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean>;
     
     //UPDATE
-    //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean | null>
-    splitUserStory(userStrory: UserStory): Promise<Boolean | null>;
+    //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
+    splitUserStory(userStrory: UserStory): Promise<Boolean>;
 
     //AI
     bedrock(prompt: string): Promise<string>;
     //chatgpt(prompt: string): Promise<string>;
-    sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean | null>;
+    sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>;
 }
