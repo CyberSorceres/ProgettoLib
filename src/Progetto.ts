@@ -13,7 +13,12 @@ export class Progetto{
 	private _epicStoriesIds: string[];
 	private _ai: AI;
 	
-	constructor(project?: ProjectData){
+	constructor(id: string, name: string, isValidated: boolean, epicStoriesIds: string[], ai: AI, project?: ProjectData){
+		this._id = id;
+		this._name = name;
+		this._isValidated = isValidated;
+		this._epicStoriesIds = epicStoriesIds;
+		this._ai = ai;
 		if(project){ //construct project from projectData
 			this._id = project.id;
 			this._name = project.name;

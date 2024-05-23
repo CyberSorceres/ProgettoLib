@@ -12,7 +12,7 @@ export class API implements API_interface {
         try{
             const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
             if(response.ok){
-                this.token = (await response.json() as any).AuthenticationResult.AccessToken;
+                this.token = (await response.json() as any).AuthenticationResult.IdToken;
                 return true;
             }
             else{
