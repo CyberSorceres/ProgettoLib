@@ -1,5 +1,5 @@
 import { describe, expect, beforeEach, test} from 'vitest';
-import { Progetto } from '../../src/Progetto';
+import { AI, Progetto } from '../../src/Progetto';
 import { MockAPI } from '../../src/MockAPI';
 import { API_interface } from '../../src/API_interface';
 
@@ -21,6 +21,7 @@ describe('Progetto', () => {
         expect(nonInitializedProgetto.name).toBeUndefined();
         expect(nonInitializedProgetto.isValidated).toBeUndefined();
         expect(nonInitializedProgetto.epicStoriesIds).toBeUndefined();
+        expect(nonInitializedProgetto.ai).toBeUndefined();
     });
 
     test('should correctly construct a new project given the Id', async () => {
@@ -28,5 +29,6 @@ describe('Progetto', () => {
         expect(initializedProgetto.isValidated).toBe(true);
         expect(initializedProgetto.name).toBe('Project A');
         expect(initializedProgetto.epicStoriesIds).toEqual(['1']);
+        expect(initializedProgetto.ai).toBe(AI.Bedrock);
     });
 }); 

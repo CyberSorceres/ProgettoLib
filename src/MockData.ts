@@ -1,3 +1,4 @@
+import { AI } from "./Progetto";
 import { Test } from "./Test";
 import { State } from "./UserStory"; 
 
@@ -7,6 +8,7 @@ export interface ProjectData {
 	name: string;
 	isValidated: boolean;
 	epicStoriesIds: string[];
+  ai: AI;
 }
 export interface EpicData {
 	id: string;
@@ -121,12 +123,14 @@ export const mockProjects: ProjectData[] = [
     id: "1",
     name: "Project A",
     isValidated: true,
-    epicStoriesIds: ['1']
+    epicStoriesIds: ['1'],
+    ai: AI.Bedrock
   },
   {
     id: "2",
     name: "Project B",
     isValidated: false,
-    epicStoriesIds: ['2', '3']
+    epicStoriesIds: ['2', '3'],
+    ai: AI.ChatGPT
   }
 ];

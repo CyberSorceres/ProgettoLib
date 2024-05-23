@@ -1,11 +1,17 @@
 import { API_interface } from "./API_interface";
 import { ProjectData } from "./MockData";
 
+export enum AI {
+    ChatGPT,
+	Bedrock
+}
+
 export class Progetto{
 	private _id: string;
 	private _name: string;
 	private _isValidated: boolean;
 	private _epicStoriesIds: string[];
+	private _ai: AI;
 	
 	constructor(project?: ProjectData){
 		if(project){ //construct project from projectData
@@ -13,6 +19,7 @@ export class Progetto{
 			this._name = project.name;
 			this._isValidated = project.isValidated;
 			this._epicStoriesIds = project.epicStoriesIds;
+			this._ai = project.ai;
 		}
 	}
 	
@@ -49,5 +56,9 @@ export class Progetto{
 	
 	public get epicStoriesIds(): string[]{
 		return this._epicStoriesIds;
+	}
+
+	public get ai(): AI{
+		return this._ai;
 	}
 }
