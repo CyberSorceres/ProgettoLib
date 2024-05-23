@@ -1,6 +1,13 @@
 import { EpicData } from "./EpicStory";
-import { ProjectData } from "./Progetto";
 import { UserData, State } from "./UserStory"; 
+
+// Define the ProjectData interface
+export interface ProjectData {
+	id: string;
+	name: string;
+	isValidated: boolean;
+	epicStoriesIds: string[];
+}
 
 export const mockUserStories: UserData[] = [
   {
@@ -100,12 +107,12 @@ export const mockProjects: ProjectData[] = [
     id: "1",
     name: "Project A",
     isValidated: true,
-    epicStories: [mockEpicStories[0]]
+    epicStoriesIds: ['1']
   },
   {
     id: "2",
     name: "Project B",
     isValidated: false,
-    epicStories: [mockEpicStories[1], mockEpicStories[2]]
+    epicStoriesIds: ['2', '3']
   }
 ];

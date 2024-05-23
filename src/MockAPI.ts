@@ -1,7 +1,7 @@
 import { API_interface } from "./API_interface";
 import { EpicData, EpicStory } from "./EpicStory";
-import { mockProjects, mockEpicStories, mockUserStories } from "./MockData";
-import { Progetto, ProjectData } from "./Progetto";
+import { mockProjects, mockEpicStories, mockUserStories, ProjectData } from "./MockData";
+import { Progetto} from "./Progetto";
 import { UserData, UserStory} from "./UserStory"
 
 
@@ -17,7 +17,7 @@ export class MockAPI implements API_interface{
 		// Simulate fetching project data from a mock data source
 		const mockProject: ProjectData | undefined = mockProjects.find(project => project.id === myId);
 		
-		return Promise.resolve(new Progetto('0', mockProject));
+		return Promise.resolve(new Progetto(mockProject));
 	}
 	
 	getEpicStory(myId: string): Promise<EpicStory | null> {
