@@ -5,7 +5,26 @@ import { UserData, UserStory } from "./UserStory";
 
 export class API implements API_interface {
     private token: string;
-
+    
+//LOGIN
+    async login(email: string, password: string): Promise<boolean> {
+        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/login';
+        try{
+            const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
+            if(response.ok){
+                this.token = (await response.json() as any).AuthenticationResult.AccessToken;
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch(error){
+            throw new Error(`Failed to fetch data from API: ${error.message}`);
+        }
+    }
+    
+    
+//GET
     async getProgetto(id: string): Promise<Progetto> {
         try {
             const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/getProgetti';
@@ -44,7 +63,7 @@ export class API implements API_interface {
             throw new Error('Failed to fetch data from API: Epic story with that id not found');
         }
     }
-
+    
     
     async getUserStory(id: string): Promise<UserStory | null> {
         try {
@@ -60,7 +79,30 @@ export class API implements API_interface {
             throw new Error('Failed to fetch data from API: User story with that id not found');
         }
     }
+    
+//ADD
+    async addProject(progetto: Progetto): Promise<Boolean | null>{
+        return null;
+        //TODO
+    }
+    async addEpicStory(epic: EpicStory, projectId: string): Promise<string | null>{
+        return null;
+        //TODO
+    }
+    async addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean | null>{
+        return null;
+        //TODO
+    }
+    
+//UPDATE
+    //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean | null>
+    splitUserStory(userStrory: UserStory): Promise<Boolean | null>{
+        return null;
+        //TODO
+    }
 
+        
+//AI
     async bedrock(prompt: string): Promise<string> {
         const endpoint = `https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock?message=${prompt}`;
         const response = await this.authenticatedFetch(endpoint);
@@ -73,6 +115,13 @@ export class API implements API_interface {
         }
     }
 
+
+    //chatgpt(prompt: string): Promise<string>;
+    sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean | null>{
+         return null;
+         //TODO
+    }
+    
     /*async chatgpt(prompt: string): Promise<string> {
         const endpoint = '...';
         const response = await this.authenticatedFetch(endpoint, {method:'get', body: JSON.stringify({prompt})});
@@ -84,24 +133,10 @@ export class API implements API_interface {
         }
     }*/
 
-    async login(email: string, password: string): Promise<boolean> {
-        const endpoint = 'https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/login';
-        try{
-            const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
-            if(response.ok){
-                this.token = (await response.json() as any).AuthenticationResult.AccessToken;
-                return true;
-            }
-            else{
-                return false;
-            }
-        } catch(error){
-            throw new Error(`Failed to fetch data from API: ${error.message}`);
-        }
-    }
 
+//PRIVATE
     private async authenticatedFetch(url: string, options: object = {}): Promise<any>{
         return await fetch(url, {...options, headers: {Authorization: `Bearer ${this.token}`}});
     }
-
+    
 }
