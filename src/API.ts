@@ -69,14 +69,19 @@ export class API implements API_interface {
     
     async getEpicStory(epicId: string, projectId: string): Promise<EpicStory> {
         try {
-            const endpoint = `${API.baseUrl}/getProgetto?projectId=${projectId}?epicStoryId=${epicId}`;
-            const response = await this.authenticatedFetch(endpoint);
-            const jsonData: EpicStory[] = await response.json() as EpicStory[];
-            const epicStory = jsonData.find((epic: EpicStory) => epic.id === id);
-            if (!epicStory) {
-                throw new Error(`Epic story with id ${id} not found`);
+            const endpoint = `${API.baseUrl}/getProgetto`;
+            const body = JSON.stringify({
+                "projectId": projectId,
+                "epicStoryId": epicId
+              });
+            const response = await this.authenticatedFetch(endpoint, {body});
+            if(response.ok){
+                const epic = response.json();
+                return new EpicStory(epic.id, epic.descrizione, epic.userStories);
             }
-            return epicStory;
+            else{
+                return undefined;
+            }
         } catch (error) {
             throw new Error('Failed to fetch data from API: Epic story with that id not found');
         }
