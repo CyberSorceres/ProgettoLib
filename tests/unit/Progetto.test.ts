@@ -24,11 +24,9 @@ describe('Progetto', () => {
     });
 
     test('should correctly construct a new project given the Id', async () => {
-        const expectedIds: string[] = ['1'];
-
         expect(initializedProgetto.id).toBe('1');
         expect(initializedProgetto.isValidated).toBe(true);
         expect(initializedProgetto.name).toBe('Project A');
-        expect(initializedProgetto.epicStoriesIds).toEqual(expectedIds);
+        expect(initializedProgetto.epicStoriesIds).toEqual(['1']);
     });
 }); 
