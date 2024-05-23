@@ -1,6 +1,6 @@
 import { API_interface } from "./API_interface";
-import { EpicData, EpicStory } from "./EpicStory";
-import { mockProjects, mockEpicStories, mockUserStories, ProjectData } from "./MockData";
+import { EpicStory } from "./EpicStory";
+import { mockProjects, mockEpicStories, mockUserStories, ProjectData, EpicData } from "./MockData";
 import { Progetto} from "./Progetto";
 import { UserData, UserStory} from "./UserStory"
 
@@ -23,7 +23,7 @@ export class MockAPI implements API_interface{
 	getEpicStory(myId: string): Promise<EpicStory | null> {
 		const mockEpic: EpicData | undefined = mockEpicStories.find(epic => epic.id === myId);
 		
-		return Promise.resolve(new EpicStory('0', mockEpic));
+		return Promise.resolve(new EpicStory(mockEpic));
 	}
 	getUserStory(myId: string): Promise<UserStory | null> {
 		const mockUser: UserData | undefined = mockUserStories.find(user => user.id === myId);
