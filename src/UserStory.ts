@@ -16,7 +16,13 @@ export class UserStory{
     private _verified: boolean;
     private _test: Test;
     
-    constructor(user?: UserData){
+    constructor(id: string, tag: string, description: string, state: State, verified: boolean, test: Test, user?: UserData){
+        this._id = id;
+        this._tag = tag;
+        this._description = description;
+        this._state = state;
+        this._verified = verified;
+        this._test = test;
         if(user){
             this._id = user.id;
             this._tag = user.tag;
