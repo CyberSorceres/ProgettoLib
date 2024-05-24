@@ -62,7 +62,7 @@ export class API implements API_interface {
     try {
       const response = await this.authenticatedFetch(endpoint);
       if (response.ok) {
-        const progetti = response.json();
+        const progetti = await response.json();
         return progetti.map((p) => this.jsonToProject(p));
       } else {
         return undefined;
