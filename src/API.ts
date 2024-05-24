@@ -182,7 +182,7 @@ export class API implements API_interface {
       const endpoint = `${API.baseUrl}/add_epic_story`;
       const body = JSON.stringify({
         description: epic.descrizione,
-        projecId: projectId,
+        projectId: projectId,
       });
 
       const response = await this.authenticatedFetch(endpoint, {
