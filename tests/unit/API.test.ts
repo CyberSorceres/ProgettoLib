@@ -69,4 +69,18 @@ describe('API', () => {
             });
     });
 
+    describe('getUserStoriesAssignedToUser', () => {
+        test('should return the user stories assigned to the user', async () => {
+            const userStories = await api.getUserStoriesAssignedToUser('1');
+            expect(userStories).toEqual([]);
+        });
+
+        test('should return an empty array if the user has no user stories assigned', async () => {
+            const emptyApi = new MockAPI();
+            vi.spyOn(emptyApi, 'getUserStoriesAssignedToUser').mockResolvedValue([]);
+            const userStories = await emptyApi.getUserStoriesAssignedToUser('1');
+            expect(userStories).toEqual([]);
+        });
+    });
+
 });

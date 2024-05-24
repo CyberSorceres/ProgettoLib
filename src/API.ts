@@ -60,8 +60,23 @@ export class API implements API_interface {
         }
     }
 
-    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
-        return undefined; //TODO implement
+    async getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
+        //TODO implement
+        const endpoint = `${API.baseUrl}/getUserStoriesAssignedToUser?`; //TODO Add lambda + API in backend
+        try {
+            const response = await this.authenticatedFetch(endpoint);
+            if (response.ok) {
+                const userStories: UserStory[] = [];
+                for (const story of await response.json()) {
+                    userStories.push(new UserStory(story.id, story.tag, story.description, story.state, story.verified, story.test));
+                }
+                return userStories;
+            } else {
+                throw new Error('Failed to fetch user stories assigned to the user.');
+            }
+        } catch (error) {
+            throw new Error(`Failed to fetch data from API: ${error.message}`);
+        }
     }
 
     async getProgetto(id: string): Promise<Progetto> {//FIXME

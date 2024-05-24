@@ -35,7 +35,7 @@ export class MockAPI implements API_interface{
 	}
 	
 	getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
-		const userStories: UserStory[] = [exampleUserStories[0], exampleUserStories[1]];
+		const userStories: UserStory[] = []; //MockData da aggiornare, perché deve essere aggiunto l'id dell'user sviluppatore alle user stories, o deve essere aggiunto il tag delle user stories all'user sviluppatore
 		return Promise.resolve(userStories);
 	}
 	
@@ -67,7 +67,8 @@ export class MockAPI implements API_interface{
 			throw new Error(`User Story with id ${userId} not found`);
 		}
 	}
-	
+
+
 	//ADD
 	addProject(progetto: Progetto): Promise<Boolean>{
 		return Promise.resolve(true);
