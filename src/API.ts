@@ -202,15 +202,15 @@ export class API implements API_interface {
   }
   async addUserStrory(
     userStory: UserStory,
-    projecId: string,
+    projectId: string,
+    epicStoryId: string,
   ): Promise<Boolean> {
     try {
       const endpoint = `${API.baseUrl}/add_user_story`;
       const body = JSON.stringify({
-        //TODO fix fields in lambda
-        projectId: projecId,
-        epicStoryId: "id", //FIXME epic story id shouldnt be necessary
-        tag: "tag", //FIXME tag should be generated automatically
+        projectId,
+        epicStoryId,
+        tag: userStory.tag,
         description: userStory.description,
       });
 
