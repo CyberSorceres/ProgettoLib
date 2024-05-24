@@ -5,6 +5,7 @@ import { UserStory} from "./UserStory";
 export interface API_interface {
     //LOGIN
     login(email: string, password: string): Promise<boolean>;
+    register(email: string, password: string): Promise<boolean>;
 
     //GET
     getProgettiOfUser(): Promise<Progetto[]>;

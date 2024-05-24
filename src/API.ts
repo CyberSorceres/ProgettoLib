@@ -23,6 +23,21 @@ export class API implements API_interface {
             throw new Error(`Failed to fetch data from API: ${error.message}`);
         }
     }
+
+    async register(email: string, password: string): Promise<boolean>{
+        const endpoint = `${API.baseUrl}/register`;
+        try{
+            const response = await fetch(endpoint, {method:'post', body: JSON.stringify({email,password})},);
+            if(response.ok){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch(error){
+            throw new Error(`Failed to fetch data from API: ${error.message}`);
+        }
+    }
     
     
 //GET
@@ -122,7 +137,7 @@ export class API implements API_interface {
             throw new Error("Error adding project:", error);//TODO is throwing error ok?
         }
     }
-    async addEpicStory(epic: EpicStory, projectId: string): Promise<string>{
+    async addEpicStory(epic: EpicStory, projectId: string): Promise<string>{//TODO the labda should return the id
         try {
             const endpoint = `${API.baseUrl}/add_epic_story`;
             const body = JSON.stringify({
@@ -174,14 +189,22 @@ export class API implements API_interface {
         
 //AI
     async bedrock(prompt: string): Promise<string> {
-        const endpoint = `https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev/bedrock?message=${prompt}`;
-        const response = await this.authenticatedFetch(endpoint);
-        console.log(response);
-        if(response.ok){
-            return (await response.json() as any).response;
-        }
-        else{
-            throw new Error('Failed to fetch data from API: AI could not generate a response');
+        try {
+            const endpoint = `${API.baseUrl}/bedrock`;
+            const body = JSON.stringify({
+                "message": prompt
+            });
+            
+            const response = await this.authenticatedFetch(endpoint, { body });
+            
+            if (response.ok) {
+                const responseMessage = response.json();
+                return responseMessage.text;
+            } else {
+                return undefined;
+            }
+        } catch (error) {
+            throw new Error("Error while triync to connect to bedrock:", error);//TODO is throwing error ok?
         }
     }
 
