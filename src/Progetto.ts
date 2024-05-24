@@ -1,5 +1,4 @@
 import { API_interface } from "./API_interface";
-import { ProjectData } from "./MockData";
 
 export enum AI {
     ChatGPT,
@@ -13,19 +12,12 @@ export class Progetto{
 	private _epicStoriesIds: string[];
 	private _ai: AI;
 	
-	constructor(id: string, name: string, isValidated: boolean, epicStoriesIds: string[], ai: AI, project?: ProjectData){
+	constructor(id: string, name: string, isValidated: boolean, epicStoriesIds: string[], ai: AI){
 		this._id = id;
 		this._name = name;
 		this._isValidated = isValidated;
 		this._epicStoriesIds = epicStoriesIds;
 		this._ai = ai;
-		if(project){ //construct project from projectData
-			this._id = project.id;
-			this._name = project.name;
-			this._isValidated = project.isValidated;
-			this._epicStoriesIds = project.epicStoriesIds;
-			this._ai = project.ai;
-		}
 	}
 	
 	public async fetchData(myAPI: API_interface, projectId: string){ //given an API instance and a projectId, initialize all the fields

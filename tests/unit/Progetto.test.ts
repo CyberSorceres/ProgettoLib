@@ -5,7 +5,6 @@ import { API_interface } from '../../src/API_interface';
 
 describe('Progetto', () => {
     let initializedProgetto: Progetto;
-    let nonInitializedProgetto: Progetto;
     let api: API_interface;
 
     beforeEach(async () => {
@@ -14,14 +13,6 @@ describe('Progetto', () => {
         if(pro != null){
             initializedProgetto = pro;
         }
-        nonInitializedProgetto = new Progetto();
-    });
-
-    test('should initialize with undefined fields', () => {
-        expect(nonInitializedProgetto.name).toBeUndefined();
-        expect(nonInitializedProgetto.isValidated).toBeUndefined();
-        expect(nonInitializedProgetto.epicStoriesIds).toBeUndefined();
-        expect(nonInitializedProgetto.ai).toBeUndefined();
     });
 
     test('should correctly construct a new project given the Id', async () => {

@@ -1,5 +1,4 @@
 import { API_interface } from "./API_interface";
-import { EpicData } from "./MockData";
 import {UserStory } from "./UserStory";
 
 export class EpicStory{
@@ -8,16 +7,11 @@ export class EpicStory{
 	private _userStoriesIds: string[];
 	
 	
-	constructor(id: string, descrizione: string, userStoriesIds: string[], epic?: EpicData) 
+	constructor(id: string, descrizione: string, userStoriesIds: string[]) 
 	{
 		this._id = id;
 		this._descrizione = descrizione;
 		this._userStoriesIds = userStoriesIds;
-		if(epic){
-			this._id = epic.id;
-			this._descrizione = epic.descrizione;
-			this._userStoriesIds = epic.userStoriesIds;
-		}
 	}
 
 	
