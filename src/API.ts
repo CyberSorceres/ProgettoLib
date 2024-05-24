@@ -214,7 +214,7 @@ export class API implements API_interface {
         description: userStory.description,
       });
 
-      const response = await this.authenticatedFetch(endpoint, { body });
+      const response = await this.authenticatedFetch(endpoint, { body, method: 'POST' });
 
       if (response.ok) {
         return true;
