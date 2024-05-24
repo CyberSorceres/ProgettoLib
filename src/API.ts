@@ -104,17 +104,64 @@ export class API implements API_interface {
     }
     
 //ADD
-    async addProject(progetto: Progetto): Promise<Boolean>{
-        return null;
-        //TODO
+    async addProject(progetto: Progetto): Promise<Boolean>{//TODO decide if its better to return the id
+        try {
+            const endpoint = `${API.baseUrl}/add_progetto`;
+            const body = JSON.stringify({
+                "name": progetto.name
+            });
+            
+            const response = await this.authenticatedFetch(endpoint, { body });
+            
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            throw new Error("Error adding project:", error);//TODO is throwing error ok?
+        }
     }
     async addEpicStory(epic: EpicStory, projectId: string): Promise<string>{
-        return null;
-        //TODO
+        try {
+            const endpoint = `${API.baseUrl}/add_epic_story`;
+            const body = JSON.stringify({
+                "description": epic.descrizione,
+                "projecId": projectId
+            });
+            
+            const response = await this.authenticatedFetch(endpoint, { body });
+            
+            if (response.ok) {
+                epic = response.json();
+                return epic.descrizione;
+            } else {
+                return undefined;
+            }
+        } catch (error) {
+            throw new Error("Error adding episctory:", error);//TODO is throwing error ok?
+        }
     }
-    async addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean>{
-        return null;
-        //TODO
+    async addUserStrory(userStory: UserStory, projecId: string): Promise<Boolean>{
+        try {
+            const endpoint = `${API.baseUrl}/add_user_story`;
+            const body = JSON.stringify({ //TODO fix fields in lambda
+                "projectId": projecId,
+                "epicStoryId": "id",//FIXME epic story id shouldnt be necessary
+                "tag": "tag", //FIXME tag should be generated automatically
+                "description": userStory.description
+            });
+            
+            const response = await this.authenticatedFetch(endpoint, { body });
+            
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            throw new Error("Error adding project:", error);//TODO is throwing error ok?
+        }
     }
     
 //UPDATE

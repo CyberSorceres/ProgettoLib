@@ -17,7 +17,7 @@ export interface API_interface {
     //ADD
     addProject(progetto: Progetto): Promise<Boolean>;
     addEpicStory(epic: EpicStory, projectId: string): Promise<string>; //returns the id generated in the DB
-    addUserStrory(userStory: UserStory, epicId: string): Promise<Boolean>;
+    addUserStrory(userStory: UserStory, projectId: string): Promise<Boolean>;
     
     //UPDATE
     //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>

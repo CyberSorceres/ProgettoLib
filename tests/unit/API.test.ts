@@ -119,6 +119,10 @@ describe('API', () => {
             const response = await api.bedrock(prompt);
             console.log(response);
         });
+        test('login', async () => {
+            api.login(email, password);
+            
+        })
     });
     
     describe('promptToApi', () => {
@@ -132,6 +136,7 @@ describe('API', () => {
             const response = await api.promptToAI('Prompt');
             expect(response).toEqual('Response from AI');
         });
+
     });
 });
 
