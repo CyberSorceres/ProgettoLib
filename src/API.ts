@@ -162,7 +162,10 @@ export class API implements API_interface {
         name: progetto.name,
       });
 
-      const response = await this.authenticatedFetch(endpoint, { body });
+      const response = await this.authenticatedFetch(endpoint, {
+        body,
+        method: "POST",
+      });
 
       if (response.ok) {
         return true;
@@ -182,7 +185,10 @@ export class API implements API_interface {
         projecId: projectId,
       });
 
-      const response = await this.authenticatedFetch(endpoint, { body });
+      const response = await this.authenticatedFetch(endpoint, {
+        body,
+        method: "POST",
+      });
 
       if (response.ok) {
         epic = response.json();
