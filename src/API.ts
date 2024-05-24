@@ -228,10 +228,21 @@ export class API implements API_interface {
 
   //UPDATE
   //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
-  splitUserStory(userStrory: UserStory): Promise<Boolean> {
-    return null;
-    //TODO
-  }
+  async splitUserStory(userStory: UserStory): Promise<Boolean> {
+    try {
+        const endpoint = `${API.baseUrl}/split_user_story`;
+        const body = JSON.stringify({
+            "userStoryId": userStory.id
+        });
+        const response = await this.authenticatedFetch(endpoint, { body });
+        if (!response.ok) {
+            throw new Error(`Error splitting user story: ${response.statusText}`);
+        }
+        return true;
+    } catch (error) {
+        throw new Error(`Error splitting user story: ${error.message}`);
+    }
+}
 
   //AI
   async bedrock(prompt: string): Promise<string> {

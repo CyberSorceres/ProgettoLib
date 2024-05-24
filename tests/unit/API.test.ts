@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, afterEach, beforeEach, beforeAll } from 'vitest';
-import { MockAPI } from '../../src/MockAPI'
+import { MockAPI } from '../../src/MockAPI';
 import { EpicStory } from '../../src/EpicStory';
 import { exampleProjects } from '../../src/MockData';
 import { State, UserStory } from '../../src/UserStory';
@@ -13,11 +13,10 @@ describe('API', () => {
 
     const incorrectEmail = 'incorrectemail@gmail.com';
     const incorrectPassword = 'incorrectpassword';
-    
 
-    beforeEach( () => {
+
+    beforeEach(() => {
         api = new MockAPI();
-
         api.register(correctEmail, correctPassword);
     });
 
@@ -31,42 +30,37 @@ describe('API', () => {
         });
     });
 
-
     describe('getProgetto', () => {
         test('should return the project with the specified id', async () => {
-
             const project = await api.getProgetto('1');
             expect(project).toEqual(exampleProjects.find(obj => obj.id === '1'));
         });
 
         test('should throw an error if the project is not found', () => {
-
             expect(() => api.getProgetto('99')).toThrow('Project with id 99 not found');
         });
     });
 
     describe('getEpicStory', () => {
         test('should return the epic story with the specified id', async () => {
-
             const epicStory = await api.getEpicStory('1', '1');
             expect(epicStory).toEqual(new EpicStory('1', 'Epic Story 1', ['1', '2', '3']));
         });
 
         test('should throw an error if the epic story is not found', () => {
-                expect(() => api.getEpicStory('99', '1')).toThrow('Epic Story with id 99 not found');
-            });
+            expect(() => api.getEpicStory('99', '1')).toThrow('Epic Story with id 99 not found');
+        });
     });
 
     describe('getUserStory', () => {
         test('should return the user story with the specified id', async () => {
-
             const epicStory = await api.getUserStory('1', '1');
             expect(epicStory).toEqual(new UserStory('1', 'user1', 'Description for user 1', State.TO_DO, true, undefined));
         });
 
         test('should throw an error if the user story is not found', () => {
-                expect(() => api.getUserStory('99', '1')).toThrow('User Story with id 99 not found');
-            });
+            expect(() => api.getUserStory('99', '1')).toThrow('User Story with id 99 not found');
+        });
     });
 
     describe('getUserStoriesAssignedToUser', () => {
@@ -82,5 +76,30 @@ describe('API', () => {
             expect(userStories).toEqual([]);
         });
     });
+
+    describe('splitUserStory', () => {
+        test('should split a user story successfully', async () => {
+            // Create a sample user story
+            const userStory = new UserStory('1', 'tag1', 'Description for user story 1', State.TO_DO, true, undefined);
+            // Mock the successful splitting of the user story
+            api.splitUserStory = async (userStory: UserStory) => true;
+            // Call the function to split the user story
+            const result = await api.splitUserStory(userStory);
+            // Check if the function returned true
+            expect(result).toBe(true);
+        });
+
+        test('should throw an error if splitting the user story fails', async () => {
+            // Create a sample user story
+            const userStory = new UserStory('1', 'tag1', 'Description for user story 1', State.T, true, undefined);
+            // Mock the failed splitting of the user story
+            api.splitUserStory = async (userStory: UserStory) => {
+                throw new Error('Failed to split user story');
+            };
+            // Call the function to split the user story and expect it to throw an error
+            await expect(api.splitUserStory(userStory)).rejects.toThrow('Failed to split user story');
+        });
+    });
+    
 
 });
