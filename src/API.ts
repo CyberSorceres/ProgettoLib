@@ -123,7 +123,7 @@ export class API implements API_interface {
       });
       const response = await this.authenticatedFetch(endpoint, { body });
       if (response.ok) {
-        const epic = response.json();
+        const epic = await response.json();
         return new EpicStory(epic.id, epic.descrizione, epic.userStories);
       } else {
         return undefined;
