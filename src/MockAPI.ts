@@ -1,40 +1,71 @@
 import { API_interface } from "./API_interface";
 import { EpicStory } from "./EpicStory";
-import { mockProjects, mockEpicStories, mockUserStories, ProjectData, EpicData, UserData } from "./MockData";
+import { exampleProjects, exampleEpicStories, exampleUserStories} from "./MockData";
 import { Progetto} from "./Progetto";
 import { UserStory} from "./UserStory"
 
 
 export class MockAPI implements API_interface{
+	private email: string;
+	private password: string;
+
 	
-//LOGIN
-	login(email: string, password: string): Promise<boolean> {
+	//REGISTER AND LOGIN
+	
+	register(email: string, password: string): Promise<boolean> {
+		this.email = email;
+		this.password = password;
+		
 		return Promise.resolve(true);
+		
+	}
+	login(email: string, password: string): Promise<boolean> {
+		if(email == this.email && password == this.password){
+			return Promise.resolve(true);
+		}
+		else{
+			return Promise.resolve(false);
+		}
 	}
 	
 	//GET
-    getProgettiOfUser(): Promise<Progetto[]>{
-		const progetti: Progetto[] = [new Progetto(mockProjects[0]), new Progetto(mockProjects[1])];
+	getProgettiOfUser(): Promise<Progetto[]>{
+		const progetti: Progetto[] = [exampleProjects[0], exampleProjects[1]];
 		return Promise.resolve(progetti);
 	}
-
-    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
-		const userStories: UserStory[] = [new UserStory(mockUserStories[0]), new UserStory(mockUserStories[1])];
+	
+	getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
+		const userStories: UserStory[] = [exampleUserStories[0], exampleUserStories[1]];
 		return Promise.resolve(userStories);
 	}
-
+	
 	getProgetto(projectId: string): Promise<Progetto> {
-		const progetto = new Progetto(mockProjects[projectId])
-		return Promise.resolve(progetto);
+		const progetto = exampleProjects.find(obj => obj.id === projectId);
+		if(progetto){
+			return Promise.resolve(progetto);
+		}
+		else{
+			throw new Error(`Project with id ${projectId} not found`);
+		}
 	}
 	
 	getEpicStory(epicId: string, projectId: string): Promise<EpicStory> {
-		const epic = new EpicStory(mockEpicStories[epicId]);
-		return Promise.resolve(epic);
+		const epic = exampleEpicStories.find(obj => obj.id === epicId);
+		if(epic){
+			return Promise.resolve(epic);
+		}
+		else{
+			throw new Error(`Epic Story with id ${epicId} not found`);
+		}
 	}
 	getUserStory(userId: string, projectId: string): Promise<UserStory> {
-		const userStory = new UserStory(mockUserStories[userId])
-		return Promise.resolve(userStory);
+		const user = exampleUserStories.find(obj => obj.id === userId);
+		if(user){
+			return Promise.resolve(user);
+		}
+		else{
+			throw new Error(`User Story with id ${userId} not found`);
+		}
 	}
 	
 	//ADD
@@ -62,7 +93,7 @@ export class MockAPI implements API_interface{
 	sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>{
 		return Promise.resolve(true);
 	}
-
 	
-
+	
+	
 }
