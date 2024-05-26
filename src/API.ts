@@ -197,8 +197,7 @@ export class API implements API_interface {
       });
 
       if (response.ok) {
-        epic = response.json();
-        return epic.descrizione;
+        return await response.json();
       } else {
         return undefined;
       }
