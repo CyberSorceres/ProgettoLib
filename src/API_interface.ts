@@ -3,6 +3,7 @@ import { EpicStory } from "./EpicStory";
 import { UserStory} from "./UserStory";
 
 export interface API_interface {
+    loggedIn(): boolean;
     //LOGIN
     login(email: string, password: string): Promise<boolean>;
     register(email: string, password: string): Promise<boolean>;

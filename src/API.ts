@@ -5,6 +5,7 @@ import { UserStory } from "./UserStory";
 
 export class API implements API_interface {
   private token: string;
+  
   private static baseUrl: string =
     "https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev";
 
@@ -39,9 +40,9 @@ export class API implements API_interface {
     }
   }
 
-  private loggedIn() {
+  public loggedIn(): boolean {
     if (this.token === undefined) {
-      throw new Error("Not logged in");
+      return false;
     }
     else {
       return true;
