@@ -116,12 +116,8 @@ export class API implements API_interface {
 
   async getEpicStory(epicId: string, projectId: string): Promise<EpicStory> {
     try {
-      const endpoint = `${API.baseUrl}/getProgetto`;
-      const body = JSON.stringify({
-        projectId: projectId,
-        epicStoryId: epicId,
-      });
-      const response = await this.authenticatedFetch(endpoint, { body });
+      const endpoint = `${API.baseUrl}/getEpicStory?projectId=${projectId}&epicId=${epicStoryId}`;
+      const response = await this.authenticatedFetch(endpoint);
       if (response.ok) {
         const epic = await response.json();
         return new EpicStory(epic.id, epic.descrizione, epic.userStories);
