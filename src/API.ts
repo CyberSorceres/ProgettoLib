@@ -72,7 +72,7 @@ export class API implements API_interface {
     }
   }
 
-  async getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]> {
+  async getUserStoriesAssignedToUser(): Promise<UserStory[]> {
     //TODO implement
     const endpoint = `${API.baseUrl}/getUserStoriesAssignedToUser?`; //TODO Add lambda + API in backend
     try {

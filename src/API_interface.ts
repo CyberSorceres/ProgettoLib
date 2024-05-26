@@ -9,7 +9,7 @@ export interface API_interface {
 
     //GET
     getProgettiOfUser(): Promise<Progetto[]>;
-    getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>;
+    getUserStoriesAssignedToUser(): Promise<UserStory[]>;
 
     getProgetto(projectId: string): Promise<Progetto>;
     getEpicStory(epicId: string, projectId: string): Promise<EpicStory>;    
