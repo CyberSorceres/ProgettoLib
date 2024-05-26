@@ -39,6 +39,14 @@ export class API implements API_interface {
     }
   }
 
+  private loggedIn() {
+    if (this.token === undefined) {
+      throw new Error("Not logged in");
+    }
+    else {
+      return true;
+    }
+  }
   async register(email: string, password: string): Promise<boolean> {
     const endpoint = `${API.baseUrl}/register`;
     try {

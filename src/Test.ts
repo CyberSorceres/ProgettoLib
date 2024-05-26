@@ -44,7 +44,15 @@ export class Test{
         return this._UScode;
     }
 
+    public set UScode(code: string) {  
+        this._UScode = code;
+    }
+
     public get testCode(): string {
         return this._testCode;
+    }
+
+    public set testCode(code: string) {
+        this._testCode = code;  
     }
 }
