@@ -252,9 +252,8 @@ export class API implements API_interface {
 
   //AI
   async bedrock(prompt: string): Promise<string> {
-      try {
-	  const p = `${prompt}`
-	  const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}`;
+    try {
+       const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}`;
 
       const response = await this.authenticatedFetch(endpoint);
 
