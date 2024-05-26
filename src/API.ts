@@ -255,11 +255,8 @@ export class API implements API_interface {
       try {
 	  const p = `${prompt}`
 	  const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}`;
-      const body = JSON.stringify({
-        message: prompt,
-      });
 
-      const response = await this.authenticatedFetch(endpoint, { body });
+      const response = await this.authenticatedFetch(endpoint);
 
       if (response.ok) {
         const responseMessage = response.json();
