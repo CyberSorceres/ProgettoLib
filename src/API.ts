@@ -258,8 +258,7 @@ export class API implements API_interface {
       const response = await this.authenticatedFetch(endpoint);
 
       if (response.ok) {
-        const responseMessage = response.json();
-        return responseMessage.text;
+        return await response.json();
       } else {
         return undefined;
       }
