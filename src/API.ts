@@ -252,8 +252,9 @@ export class API implements API_interface {
 
   //AI
   async bedrock(prompt: string): Promise<string> {
-    try {
-      const endpoint = `${API.baseUrl}/bedrock`;
+      try {
+	  const p = `${prompt}`
+	  const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}`;
       const body = JSON.stringify({
         message: prompt,
       });
