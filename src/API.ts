@@ -275,9 +275,9 @@ export class API implements API_interface {
     //TODO
   }
 
-    async invite(projectId: string, role: number): Promise<string> {
+    async invite(projectId: string, email: string, role: number): Promise<string> {
 	const request = await this.authenticatedFetch(`${API.baseUrl}/invite`, {method: 'POST', body: JSON.stringify({
-	    projectId, role
+	    projectId, email, role
 	})})
 	if (request.ok) {
 	    const response = await request.json();
