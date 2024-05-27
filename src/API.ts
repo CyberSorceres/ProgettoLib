@@ -275,6 +275,29 @@ export class API implements API_interface {
     //TODO
   }
 
+    async invite(projectId: string, role: number): Promise<string> {
+	const request = await this.authenticatedFetch(`${API.baseUrl}/invite`, {method: 'POST', body: JSON.stringify({
+	    projectId, role
+	})})
+	if (request.ok) {
+	    const response = await request.json();
+	    return response.invite
+	} else {
+	    throw new Error('Couldn\'t create invite');
+	}
+    }
+
+    async acceptInvite(inviteId: string): Promise<boolean> {
+	const request = await this.authenticatedFetch(`${API.baseUrl}/accept_invite`, {method: 'POST', body: JSON.stringify({
+	    inviteId
+	})})
+	if (request.ok) {
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
   /*async chatgpt(prompt: string): Promise<string> {
         const endpoint = '...';
         const response = await this.authenticatedFetch(endpoint, {method:'get', body: JSON.stringify({prompt})});
