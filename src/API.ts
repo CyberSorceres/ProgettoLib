@@ -281,7 +281,7 @@ export class API implements API_interface {
 	})})
 	if (request.ok) {
 	    const response = await request.json();
-	    return response.invite
+	    return response.invite.id
 	} else {
 	    throw new Error('Couldn\'t create invite');
 	}
