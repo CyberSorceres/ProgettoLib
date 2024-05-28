@@ -1,10 +1,12 @@
 import { API_interface } from "./API_interface";
 import { EpicStory } from "./EpicStory";
 import { Progetto } from "./Progetto";
+import { LoginState, API_interface } from './API_Interface'
 import { UserStory } from "./UserStory";
 
 export class API implements API_interface {
-  private token: string;
+    private token: string;
+    private session: string;
   
   private static baseUrl: string =
   "https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev";
@@ -20,26 +22,41 @@ export class API implements API_interface {
   }
   
   //LOGIN
-  async login(email: string, password: string): Promise<boolean> {
+  async login(email: string, password: string): Promise<LoginState> {
     const endpoint = `${API.baseUrl}/login`;
     try {
       const response = await fetch(endpoint, {
         method: "post",
         body: JSON.stringify({ email, password }),
       });
-      if (response.ok) {
-        this.token = (
-          (await response.json()) as any
-        ).AuthenticationResult.IdToken;
-        return true;
+	if (response.ok) {
+	    const responseObject = (await response.json()) as any;
+	    if (responseObject?.AuthenticationResult?.IdToken) {
+		this.token = responseObject?.AuthenticationResult?.IdToken;
+		return LoginState.LOGGED_IN;
+	    } else {
+		this.session = responseObject.Session;
+		return LoginState.MUST_SIGN_UP;
+	    }
       } else {
-        return false;
+        return LoginState.FAILED;
       }
     } catch (error) {
       throw new Error(`Failed to fetch data from API: ${error.message}`);
     }
   }
-  
+
+    async changePassword(email: string, password: string): Promise<boolean> {
+	const response = await (await fetch(`${API.baseUrl}/change_password`, {
+	    method: 'POST',
+	    body: JSON.stringify({
+		email, password, session: this.session,
+	    })
+	})).json()
+	this.token = response?.AuthenticationResult?.IdToken;
+	return !!this.token;
+    }
+
   public loggedIn(): boolean {
     if (this.token === undefined) {
       return false;
