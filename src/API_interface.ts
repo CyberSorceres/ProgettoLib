@@ -2,10 +2,16 @@ import { Progetto } from "./Progetto";
 import { EpicStory } from "./EpicStory";
 import { UserStory} from "./UserStory";
 
+export enum LoginState {
+    FAILED = 0,
+    LOGGED_IN,
+    MUST_SIGN_UP,
+}
+
 export interface API_interface {
     loggedIn(): boolean;
     //LOGIN
-    login(email: string, password: string): Promise<boolean>;
+    login(email: string, password: string): Promise<LoginState>;
     register(email: string, password: string): Promise<boolean>;
 
     //GET
