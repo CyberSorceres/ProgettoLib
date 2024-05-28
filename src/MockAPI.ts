@@ -1,4 +1,4 @@
-import { API_interface } from "./API_interface";
+import { API_interface, LoginState } from "./API_interface";
 import { EpicStory } from "./EpicStory";
 import { exampleProjects, exampleEpicStories, exampleUserStories} from "./MockData";
 import { Progetto} from "./Progetto";
@@ -14,6 +14,10 @@ export class MockAPI implements API_interface{
 	loggedIn(): boolean {
 		return true;
 	}
+
+	changePassword(email: string, password: string): Promise<boolean> {
+		return Promise.resolve(true);
+	}
 	
 	register(email: string, password: string): Promise<boolean> {
 		this.email = email;
@@ -22,12 +26,12 @@ export class MockAPI implements API_interface{
 		return Promise.resolve(true);
 		
 	}
-	login(email: string, password: string): Promise<boolean> {
+	login(email: string, password: string): Promise<LoginState> {
 		if(email == this.email && password == this.password){
-			return Promise.resolve(true);
+			return Promise.resolve(LoginState.LOGGED_IN);
 		}
 		else{
-			return Promise.resolve(false);
+			return Promise.resolve(LoginState.FAILED);
 		}
 	}
 	
