@@ -47,7 +47,7 @@ export class API implements API_interface {
   }
 
     async changePassword(email: string, password: string): Promise<boolean> {
-	await fetch(`${API.baseURL}/change_passwrd`, {
+	await fetch(`${API.baseUrl}/change_password`, {
 	    method: 'POST',
 	    body: JSON.stringify({
 		email, password, session: this.session,
