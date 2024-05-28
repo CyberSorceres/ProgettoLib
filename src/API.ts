@@ -31,8 +31,8 @@ export class API implements API_interface {
       });
 	if (response.ok) {
 	    const responseObject = (await response.json()) as any;
-	    if (responseObject?.AuthenticationResult?.Idtoken) {
-		this.token = responseObject?.AuthenticationResult?.Idtoken;
+	    if (responseObject?.AuthenticationResult?.IdToken) {
+		this.token = responseObject?.AuthenticationResult?.IdToken;
 		return LoginState.LOGGED_IN;
 	    } else {
 		this.session = responseObject.Session;
@@ -53,7 +53,7 @@ export class API implements API_interface {
 		email, password, session: this.session,
 	    })
 	})).json()
-	this.token = response?.AuthenticationResult?.Idtoken;
+	this.token = response?.AuthenticationResult?.IdToken;
 	return !!this.token;
     }
 
