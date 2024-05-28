@@ -30,12 +30,12 @@ export class API implements API_interface {
         body: JSON.stringify({ email, password }),
       });
 	if (response.ok) {
-	    const reponse = (await response.json()) as any;
-	    if (response?.AuthenticationResult?.Idtoken) {
-		this.token = response?.AuthenticationResult?.Idtoken;
+	    const responseObject = (await response.json()) as any;
+	    if (responseObject?.AuthenticationResult?.Idtoken) {
+		this.token = responseObject?.AuthenticationResult?.Idtoken;
 		return LoginState.LOGGED_IN;
 	    } else {
-		this.session = response.Session;
+		this.session = responseObject.Session;
 		return LoginState.MUST_SIGN_UP;
 	    }
       } else {
