@@ -11,6 +11,9 @@ export class MockAPI implements API_interface{
 
 	
 	//REGISTER AND LOGIN
+	loggedIn(): boolean {
+		return true;
+	}
 	
 	register(email: string, password: string): Promise<boolean> {
 		this.email = email;
@@ -34,8 +37,8 @@ export class MockAPI implements API_interface{
 		return Promise.resolve(progetti);
 	}
 	
-	getUserStoriesAssignedToUser(userId: string): Promise<UserStory[]>{
-		const userStories: UserStory[] = []; //MockData da aggiornare, perché deve essere aggiunto l'id dell'user sviluppatore alle user stories, o deve essere aggiunto il tag delle user stories all'user sviluppatore
+	getUserStoriesAssignedToUser(): Promise<UserStory[]>{
+		const userStories: UserStory[] = exampleUserStories; //MockData da aggiornare, perché deve essere aggiunto l'id dell'user sviluppatore alle user stories, o deve essere aggiunto il tag delle user stories all'user sviluppatore
 		return Promise.resolve(userStories);
 	}
 	
@@ -84,6 +87,11 @@ export class MockAPI implements API_interface{
 	//updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
 	splitUserStory(userStrory: UserStory): Promise<Boolean>{
 		return Promise.resolve(true);
+	}
+
+	//SET
+	async setUserStoryState(projectId: string, userStoryId: string, passing: boolean): Promise<Boolean>{
+		return true;
 	}
 	
 	//AI

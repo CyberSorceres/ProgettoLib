@@ -25,6 +25,9 @@ export interface API_interface {
     //updateUserStoryBasedOnFeedback(userStory: UserStory, feedback: Feedback): Promise<Boolean>
     splitUserStory(userStrory: UserStory): Promise<Boolean>;
 
+    //SET
+    setUserStoryState(projectId: string, userStoryId: string, passing: boolean): Promise<Boolean>;
+
     //AI
     bedrock(prompt: string): Promise<string>;
     //chatgpt(prompt: string): Promise<string>;
