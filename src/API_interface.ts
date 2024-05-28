@@ -13,7 +13,7 @@ export interface API_interface {
     //LOGIN
     login(email: string, password: string): Promise<LoginState>;
     register(email: string, password: string): Promise<boolean>;
-
+    changePassword(email: string, password: string): Promise<boolean>;
     //GET
     getProgettiOfUser(): Promise<Progetto[]>;
     getUserStoriesAssignedToUser(): Promise<UserStory[]>;

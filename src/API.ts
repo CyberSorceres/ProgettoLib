@@ -49,7 +49,7 @@ export class API implements API_interface {
     async changePassword(email: string, password: string): Promise<boolean> {
 	await fetch(`${API.baseURL}/change_passwrd`, {
 	    method: 'POST',
-	    body: JSONN.stringify({
+	    body: JSON.stringify({
 		email, password, session: this.session,
 	    })
 	})
