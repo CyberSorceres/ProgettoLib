@@ -1,7 +1,6 @@
-import { API_interface } from "./API_interface";
 import { EpicStory } from "./EpicStory";
 import { Progetto } from "./Progetto";
-import { LoginState, API_interface } from './API_Interface'
+import { LoginState, API_interface } from './API_interface'
 import { UserStory } from "./UserStory";
 
 export class API implements API_interface {
