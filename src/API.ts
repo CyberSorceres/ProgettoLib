@@ -307,13 +307,11 @@ export class API implements API_interface {
   //chatgpt(prompt: string): Promise<string>;
   async sendBusinessRequirementsToAI(
     businessRequirements: string,
-    projectId: string,
   ): Promise<Boolean> {
       await this.authenticatedFetch(`${API.baseUrl}/business_requirements`, {
 	  method: 'POST',
 	  body: JSON.stringify({
 	      projectId,
-	      businessRequirements
 	  })
       })
   }
