@@ -190,7 +190,7 @@ export class API implements API_interface {
       });
       
       if (response.ok) {
-        return true;
+          return (await response.json()).projectId;
       } else {
         return false;
       }
@@ -287,9 +287,9 @@ export class API implements API_interface {
   }
   
   //AI
-  async bedrock(prompt: string): Promise<string> {
+    async bedrock(prompt: string, promptId: number): Promise<string> {
     try {
-      const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}`;
+	const endpoint = `${API.baseUrl}/bedrock?message=${encodeURI(prompt)}&promptId=${promptId}`;
       
       const response = await this.authenticatedFetch(endpoint);
       

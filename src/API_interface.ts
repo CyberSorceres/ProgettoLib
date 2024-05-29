@@ -36,7 +36,7 @@ export interface API_interface {
     setUserStoryState(projectId: string, userStoryId: string, passing: boolean): Promise<Boolean>;
 
     //AI
-    bedrock(prompt: string): Promise<string>;
+    bedrock(prompt: string, promptId: number): Promise<string>;
     //chatgpt(prompt: string): Promise<string>;
     sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>;
     getNotifications(): Promise<Notification[]>;
