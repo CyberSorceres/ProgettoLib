@@ -181,7 +181,8 @@ export class API implements API_interface {
       const endpoint = `${API.baseUrl}/add_progetto`;
       const body = JSON.stringify({
         name: progetto.name,
-        ai: progetto.ai,
+          ai: progetto.ai,
+	  cliente: progetto.cliente,
       });
       
       const response = await this.authenticatedFetch(endpoint, {
