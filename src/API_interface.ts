@@ -1,6 +1,7 @@
 import { Progetto } from "./Progetto";
 import { EpicStory } from "./EpicStory";
 import { UserStory} from "./UserStory";
+import { Notification } from './Notification'
 
 export enum LoginState {
     FAILED = 0,
@@ -38,4 +39,6 @@ export interface API_interface {
     bedrock(prompt: string): Promise<string>;
     //chatgpt(prompt: string): Promise<string>;
     sendBusinessRequirementsToAI(businessRequirements: string, projectId: string): Promise<Boolean>;
+    getNotifications(): Promise<Notification[]>;
+    readNotification(id: string): Promise<boolean>
 }

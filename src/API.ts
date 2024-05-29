@@ -349,7 +349,19 @@ export class API implements API_interface {
     else{
       throw new Error('Failed to fetch data from API: AI could not generate a response');
     }
-  }*/
+    }*/
+
+    async getNotifications() {
+      return await (await this.authenticatedFetch(`${API.baseUrl}/notifications`)).json()
+  }
+    
+    async readNotification(id: string) {
+      await (await this.authenticatedFetch(`${API.baseUrl}/read_notification`, {
+	  method: 'POST',
+	  body: JSON.stringify({notification_id: id})
+      })).json()
+      return true;
+  }
   
   //PRIVATE
   private async authenticatedFetch(
