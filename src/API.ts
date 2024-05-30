@@ -16,7 +16,9 @@ export class API implements API_interface {
       projectJson.name,
       projectJson.validated,
       projectJson.epicStories,
-      projectJson.ai,
+	projectJson.ai,
+	projectJson.cliente,
+	proejctJson.date,
     );
   }
   
