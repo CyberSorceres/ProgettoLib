@@ -2,8 +2,8 @@ import { Test } from "./Test";
 
 export enum State {
     TO_DO,
-    IN_PROGRESS,
-    DONE
+    DONE,
+    DELETED
 }
 
 export class UserStory{
