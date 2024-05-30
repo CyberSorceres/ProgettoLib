@@ -313,7 +313,7 @@ export class API implements API_interface {
       await this.authenticatedFetch(`${API.baseUrl}/business_requirements`, {
 	  method: 'POST',
 	  body: JSON.stringify({
-	      projectId,
+	      businessRequirements,
 	  })
       })
   }
