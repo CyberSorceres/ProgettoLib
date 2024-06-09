@@ -6,6 +6,7 @@ import { UserStory } from "./UserStory";
 export class API implements API_interface {
     private token: string;
     private session: string;
+    role: number;
   
   private static baseUrl: string =
   "https://rzjihxrx1e.execute-api.us-east-1.amazonaws.com/dev";
@@ -34,6 +35,7 @@ export class API implements API_interface {
 	    const responseObject = (await response.json()) as any;
 	    if (responseObject?.AuthenticationResult?.IdToken) {
 		this.token = responseObject?.AuthenticationResult?.IdToken;
+		this.role = responseObject?.role;
 		return LoginState.LOGGED_IN;
 	    } else {
 		this.session = responseObject.Session;
